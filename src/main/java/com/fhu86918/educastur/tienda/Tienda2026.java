@@ -24,12 +24,30 @@ public class Tienda2026 {
     // </editor-fold>
     */
     
+    public Tienda2026() {
+        pedidos=new HashMap();
+        articulos=new HashMap();
+        clientes=new HashMap();
+    }
+    
     public static void main(String[] args) {
-        
+        Tienda2026 t=new Tienda2026();
+        t.cargaDatos();
+        t.menu();
         
     }
         
-        public static void menu() {
+    public void cargaDatos() {
+    
+    }   
+        
+    public void menu() {
+        
+    }
+    
+    
+    
+        /*public static void menu() {
         int Opcion;
         do {
             System.out.println("\n\n\n\n\n\t\t\t\tMENU PRINCIPAL\n");
@@ -183,6 +201,6 @@ public class Tienda2026 {
             }
         } while (Opcion != 9);
         menu();
-    }
+    }*/
     
 }
