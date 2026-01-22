@@ -5,6 +5,7 @@
 package com.fhu86918.educastur.tienda;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -14,7 +15,14 @@ import java.util.Scanner;
 public class Tienda2026 {
 
     private static Scanner sc=new Scanner(System.in);
-    
+    private ArrayList<Pedido> pedidos;
+    private HashMap <String, Articulo> articulos;
+    private HashMap <String, Cliente> clientes;
+    /*
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">
+    ...
+    // </editor-fold>
+    */
     
     public static void main(String[] args) {
         
