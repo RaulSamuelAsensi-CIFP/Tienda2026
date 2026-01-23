@@ -69,49 +69,152 @@ public class Tienda2026 {
         (List.of(new LineaPedido("2-11",5),new LineaPedido("2-33",3),new LineaPedido("4-33",2)))));
     }
     // </editor-fold>
-        
+
+
+
+    //<editor-fold defaultstate="fold" desc="MENUS">
     public void menu() {
         int Opcion;
         do {
             System.out.println("\n\n\n\n\n\t\t\t\tMENU PRINCIPAL\n");
             System.out.println("\t\t\t\t1 - LISTA DE ARTICULOS");
             System.out.println("\t\t\t\t2 - LISTADO DE CLIENTES");
-            System.out.println("\t\t\t\t3 - DNI CLIENTES");
-            System.out.println("\t\t\t\t4 - LISTADO DE PEDIDOS");
+            System.out.println("\t\t\t\t3 - PEDIDOS");
             System.out.println("\t\t\t\t9 - CERRAR EL PROGRAMA");
 
             Opcion = sc.nextInt();
 
             switch (Opcion) {
                 case 1:
-                    System.out.println("Artículos:");
-                    for (Articulo a : articulos.values()) { //Al trabajar con Hashmaps, hay que añadir el método ".values" para que en este caso me entregue toda la información de los artículos que pedí con el toString en la clase Articulos
-                        System.out.println(a);
-                    }
+
+                    
                     break;
                 case 2:
-                    System.out.println("Clientes:");
-                    for (Cliente c : clientes.values()) { //
-                        System.out.println(c);
-                    }
+
+                    
                     break;
                 case 3:
-                    System.out.println("DNI clientes:");
-                    for (String dni : clientes.keySet()) {
-                        System.out.println(dni);
-                    }
+                    
                     break;
+                    
                 case 4:
-                    System.out.println("Pedidos:");
-                    for (Pedido p : pedidos) {
-                        System.out.println(p);
-                    }
+
                     break;
             }
-        } while (Opcion != 9);
+        }while (Opcion != 9);
         System.out.println("Saliendo del programa...");
     }
     
+    
+    
+    
+        public void menuArticulos() {
+        int Opcion;
+        do {
+            System.out.println("\n\n\n\n\n\t\t\t\tMENU PRINCIPAL\n");
+            System.out.println("\t\t\t\t1 - LISTA DE ARTICULOS");
+            System.out.println("\t\t\t\t2 - LISTADO DE CLIENTES");
+            System.out.println("\t\t\t\t3 - PEDIDOS");
+            System.out.println("\t\t\t\t9 - CERRAR EL PROGRAMA");
+
+            Opcion = sc.nextInt();
+
+            switch (Opcion) {
+                case 1:
+                    altaArticulos();
+                    break;
+                    
+                case 2:
+                    bajaArticulos();
+                    break;
+                    
+                case 3:
+                    reposicionArticulos();
+                    break;
+                    
+                case 4:
+                    listarArticulos();
+                    break;
+                    
+                case 9:
+                    menu();
+                    break;                    
+            }
+        }while (Opcion != 9);
+        System.out.println("Saliendo del programa...");
+    }
+        
+        
+        
+    public void menuClientes() {
+        int Opcion;
+        do {
+            System.out.println("\n\n\n\n\n\t\t\t\tMENU PRINCIPAL\n");
+            System.out.println("\t\t\t\t1 - LISTA DE ARTICULOS");
+            System.out.println("\t\t\t\t2 - LISTADO DE CLIENTES");
+            System.out.println("\t\t\t\t3 - PEDIDOS");
+            System.out.println("\t\t\t\t9 - CERRAR EL PROGRAMA");
+
+            Opcion = sc.nextInt();
+
+            switch (Opcion) {
+                case 1:
+                    altaClientes();
+                    break;
+                    
+                case 2:
+                    bajaClientes();
+                    break;
+                    
+                case 3:
+                    modificacionClientes();
+                    break;
+                    
+                case 4:
+                    listaClientes();
+                    break;
+                case 9:
+                    menu();
+                    break;
+            }
+        }while (Opcion != 9);
+        System.out.println("Saliendo del programa...");
+    }
+    
+    
+    
+    public void menuPedidos() {
+        int Opcion;
+        do {
+            System.out.println("\n\n\n\n\n\t\t\t\tMENU PRINCIPAL\n");
+            System.out.println("\t\t\t\t1 - LISTA DE ARTICULOS");
+            System.out.println("\t\t\t\t2 - LISTADO DE CLIENTES");
+            System.out.println("\t\t\t\t3 - PEDIDOS");
+            System.out.println("\t\t\t\t9 - CERRAR EL PROGRAMA");
+
+            Opcion = sc.nextInt();
+
+            switch (Opcion) {
+                case 1:
+                    nuevoPedido();
+                    break;
+                    
+                case 2:
+                    listadoPedidos();
+                    break;
+                    
+                case 9:
+                    menu();
+                    break;
+            }
+        }while (Opcion != 9);
+        System.out.println("Saliendo del programa...");
+    }    
+//</editor-fold>
+
+
+
+    // <editor-fold defaultstate="fold" desc="ARTICULOS"> 
     private void altaArticulos(){
     }
     
@@ -125,6 +228,55 @@ public class Tienda2026 {
             
             
     private void listarArticulos(){
+        System.out.println("");
+        for (Articulo a : articulos.values()) {//Al trabajar con Hashmaps, hay que añadir el método ".values" para que en este caso me entregue toda la información de los artículos que pedí con el toString en la clase Articulos
+            System.out.println(a);
+        }
     }
+    // </editor-fold>
+
+
+    
+    //<editor-fold defaultstate="fold" desc="CLIENTES">
+    
+    private void altaClientes(){
+    }
+    
+    
+    private void bajaClientes(){
+    }
+            
+            
+    private void modificacionClientes(){
+    }
+    
+    
+    
+    private void listaClientes() {
+        System.out.println("DNI clientes:");
+        for (String dni : clientes.keySet()) {
+            System.out.println(dni);
+        }
+    }
+//</editor-fold>
+
+
+
+    //<editor-fold defaultstate="collapsed" desc="PEDIDOS">
+    private void nuevoPedido(){
+        
+    }
+            
+    private void listadoPedidos(){
+        System.out.println("Pedidos:");
+        for (Pedido p : pedidos) {
+            System.out.println(p);
+        }
+    }
+//</editor-fold>
+
+    
+    
+    
     
 }
