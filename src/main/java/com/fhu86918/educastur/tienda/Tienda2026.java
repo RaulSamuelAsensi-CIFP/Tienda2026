@@ -38,7 +38,8 @@ public class Tienda2026 {
         t.menu();
         
     }
-        
+    
+    // <editor-fold defaultstate="fold" desc="CARGA DATOS"> 
     public void cargaDatos(){
        clientes.put("80580845T",new Cliente("80580845T","ANA ","658111111","ana@gmail.com"));
        clientes.put("36347775R",new Cliente("36347775R","LOLA","649222222","lola@gmail.com"));
@@ -67,8 +68,7 @@ public class Tienda2026 {
        pedidos.add(new Pedido("63921307Y-001/2025",clientes.get("63921307Y"),hoy.minusDays(4), new ArrayList<>
         (List.of(new LineaPedido("2-11",5),new LineaPedido("2-33",3),new LineaPedido("4-33",2)))));
     }
-   
-        
+    // </editor-fold>
         
     public void menu() {
         int Opcion;
@@ -85,13 +85,13 @@ public class Tienda2026 {
             switch (Opcion) {
                 case 1:
                     System.out.println("Artículos:");
-                    for (Articulo a : articulos.values()) {
+                    for (Articulo a : articulos.values()) { //Al trabajar con Hashmaps, hay que añadir el método ".values" para que en este caso me entregue toda la información de los artículos que pedí con el toString en la clase Articulos
                         System.out.println(a);
                     }
                     break;
                 case 2:
                     System.out.println("Clientes:");
-                    for (Cliente c : clientes.values()) {
+                    for (Cliente c : clientes.values()) { //
                         System.out.println(c);
                     }
                     break;
@@ -111,5 +111,20 @@ public class Tienda2026 {
         } while (Opcion != 9);
         System.out.println("Saliendo del programa...");
     }
-
+    
+    private void altaArticulos(){
+    }
+    
+    
+    private void bajaArticulos(){
+    }
+            
+            
+    private void reposicionArticulos(){
+    }
+            
+            
+    private void listarArticulos(){
+    }
+    
 }
