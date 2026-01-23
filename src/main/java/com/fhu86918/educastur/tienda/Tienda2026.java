@@ -69,9 +69,9 @@ public class Tienda2026 {
         (List.of(new LineaPedido("2-11",5),new LineaPedido("2-33",3),new LineaPedido("4-33",2)))));
     }
     // </editor-fold>
-
-
-
+    
+    
+    
     //<editor-fold defaultstate="fold" desc="MENUS">
     public void menu() {
         int Opcion;
@@ -211,43 +211,49 @@ public class Tienda2026 {
         System.out.println("Saliendo del programa...");
     }    
 //</editor-fold>
-
-
-
+    
+    
+    
     // <editor-fold defaultstate="fold" desc="ARTICULOS"> 
     private void altaArticulos(){
+        
     }
     
     
     private void bajaArticulos(){
+        
     }
             
             
     private void reposicionArticulos(){
+        
     }
             
             
     private void listarArticulos(){
         System.out.println("");
-        for (Articulo a : articulos.values()) {//Al trabajar con Hashmaps, hay que añadir el método ".values" para que en este caso me entregue toda la información de los artículos que pedí con el toString en la clase Articulos
+        for (Articulo a : articulos.values()) {//Al trabajar con Hashmaps, hay que añadir el método ".values()" para que en este caso me entregue toda la información de los artículos que pedí con el toString en la clase Articulos
             System.out.println(a);
         }
     }
     // </editor-fold>
-
-
+    
+    
     
     //<editor-fold defaultstate="fold" desc="CLIENTES">
     
     private void altaClientes(){
+        
     }
     
     
     private void bajaClientes(){
+        
     }
             
             
     private void modificacionClientes(){
+        
     }
     
     
@@ -259,9 +265,9 @@ public class Tienda2026 {
         }
     }
 //</editor-fold>
-
-
-
+    
+    
+    
     //<editor-fold defaultstate="collapsed" desc="PEDIDOS">
     private void nuevoPedido(){
         
@@ -274,8 +280,31 @@ public class Tienda2026 {
         }
     }
 //</editor-fold>
-
     
+    
+    
+    //<editor-fold defaultstate="fold" desc="METODOS AUXILIARES">
+       public static boolean esInt(String s) {//metodo para transformar un string en un entero
+        int n;
+        try{
+            n=Integer.parseInt(s);
+            return true;//
+        }catch (NumberFormatException ex){
+            return false;
+        }
+    }
+    
+    public static boolean esDouble(String s) {//metodo para transformar un string en un double
+        double n;
+        try {
+            n = Double.parseDouble(s);
+            return true;
+        } catch (NumberFormatException ex) {
+            return false; 
+        }
+    }
+
+//</editor-fold>
     
     
     
