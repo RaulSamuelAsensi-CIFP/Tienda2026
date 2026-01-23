@@ -39,36 +39,6 @@ public class Tienda2026 {
         
     }
     
-    // <editor-fold defaultstate="fold" desc="CARGA DATOS"> 
-    public void cargaDatos(){
-       clientes.put("80580845T",new Cliente("80580845T","ANA ","658111111","ana@gmail.com"));
-       clientes.put("36347775R",new Cliente("36347775R","LOLA","649222222","lola@gmail.com"));
-       clientes.put("63921307Y",new Cliente("63921307Y","JUAN","652333333","juan@gmail.com"));
-       clientes.put("02337565Y",new Cliente("02337565Y","EDU","634567890","edu@gmail.com"));
-              
-       articulos.put("1-11",new Articulo("1-11","RATON LOGITECH ST ",14,15));
-       articulos.put("1-22",new Articulo("1-22","TECLADO STANDARD  ",9,18));
-       articulos.put("2-11",new Articulo("2-11","HDD SEAGATE 1 TB  ",16,80));
-       articulos.put("2-22",new Articulo("2-22","SSD KINGSTOM 256GB",9,70));
-       articulos.put("2-33",new Articulo("2-33","SSD KINGSTOM 512GB",0,200));
-       articulos.put("3-22",new Articulo("3-22","EPSON PRINT XP300 ",5,80));
-       articulos.put("4-11",new Articulo("4-11","ASUS  MONITOR  22 ",5,100));
-       articulos.put("4-22",new Articulo("4-22","HP MONITOR LED 28 ",5,180));
-       articulos.put("4-33",new Articulo("4-33","SAMSUNG ODISSEY G5",12,580));
-       
-       LocalDate hoy = LocalDate.now();
-       pedidos.add(new Pedido("80580845T-001/2025",clientes.get("80580845T"),hoy.minusDays(1), new ArrayList<>
-        (List.of(new LineaPedido("1-11",3),new LineaPedido("4-22",3)))));                                                                                                                                                               
-       pedidos.add(new Pedido("80580845T-002/2025",clientes.get("80580845T"),hoy.minusDays(2), new ArrayList<>
-        (List.of(new LineaPedido("4-11",3),new LineaPedido("4-22",2),new LineaPedido("4-33",4)))));
-       pedidos.add(new Pedido("36347775R-001/2025",clientes.get("36347775R"),hoy.minusDays(3), new ArrayList<>
-        (List.of(new LineaPedido("4-22",1),new LineaPedido("2-22",3)))));
-       pedidos.add(new Pedido("36347775R-002/2025",clientes.get("36347775R"),hoy.minusDays(5), new ArrayList<>
-        (List.of(new LineaPedido("4-33",3),new LineaPedido("2-11",3)))));
-       pedidos.add(new Pedido("63921307Y-001/2025",clientes.get("63921307Y"),hoy.minusDays(4), new ArrayList<>
-        (List.of(new LineaPedido("2-11",5),new LineaPedido("2-33",3),new LineaPedido("4-33",2)))));
-    }
-    // </editor-fold>
     
     
     
@@ -77,8 +47,8 @@ public class Tienda2026 {
         int Opcion;
         do {
             System.out.println("\n\n\n\n\n\t\t\t\tMENU PRINCIPAL\n");
-            System.out.println("\t\t\t\t1 - LISTA DE ARTICULOS");
-            System.out.println("\t\t\t\t2 - LISTADO DE CLIENTES");
+            System.out.println("\t\t\t\t1 - ARTICULOS");
+            System.out.println("\t\t\t\t2 - CLIENTES");
             System.out.println("\t\t\t\t3 - PEDIDOS");
             System.out.println("\t\t\t\t9 - CERRAR EL PROGRAMA");
 
@@ -86,20 +56,17 @@ public class Tienda2026 {
 
             switch (Opcion) {
                 case 1:
-
-                    
+                    menuArticulos();
                     break;
+                    
                 case 2:
-
-                    
+                    menuClientes();
                     break;
+                    
                 case 3:
-                    
+                    menuPedidos();
                     break;
                     
-                case 4:
-
-                    break;
             }
         }while (Opcion != 9);
         System.out.println("Saliendo del programa...");
@@ -108,14 +75,15 @@ public class Tienda2026 {
     
     
     
-        public void menuArticulos() {
+    public void menuArticulos() {
         int Opcion;
         do {
             System.out.println("\n\n\n\n\n\t\t\t\tMENU PRINCIPAL\n");
-            System.out.println("\t\t\t\t1 - LISTA DE ARTICULOS");
-            System.out.println("\t\t\t\t2 - LISTADO DE CLIENTES");
-            System.out.println("\t\t\t\t3 - PEDIDOS");
-            System.out.println("\t\t\t\t9 - CERRAR EL PROGRAMA");
+            System.out.println("\t\t\t\t1 - ALTA");
+            System.out.println("\t\t\t\t2 - BAJA");
+            System.out.println("\t\t\t\t3 - REPOSICION");
+            System.out.println("\t\t\t\t3 - LISTADOS");
+            System.out.println("\t\t\t\t9 - SALIR");
 
             Opcion = sc.nextInt();
 
@@ -150,10 +118,11 @@ public class Tienda2026 {
         int Opcion;
         do {
             System.out.println("\n\n\n\n\n\t\t\t\tMENU PRINCIPAL\n");
-            System.out.println("\t\t\t\t1 - LISTA DE ARTICULOS");
-            System.out.println("\t\t\t\t2 - LISTADO DE CLIENTES");
-            System.out.println("\t\t\t\t3 - PEDIDOS");
-            System.out.println("\t\t\t\t9 - CERRAR EL PROGRAMA");
+            System.out.println("\t\t\t\t1 - ALTA");
+            System.out.println("\t\t\t\t2 - BAJA");
+            System.out.println("\t\t\t\t3 - MODIFICACION");
+            System.out.println("\t\t\t\t3 - LISTADO");
+            System.out.println("\t\t\t\t9 - SALIR");
 
             Opcion = sc.nextInt();
 
@@ -187,9 +156,8 @@ public class Tienda2026 {
         int Opcion;
         do {
             System.out.println("\n\n\n\n\n\t\t\t\tMENU PRINCIPAL\n");
-            System.out.println("\t\t\t\t1 - LISTA DE ARTICULOS");
-            System.out.println("\t\t\t\t2 - LISTADO DE CLIENTES");
-            System.out.println("\t\t\t\t3 - PEDIDOS");
+            System.out.println("\t\t\t\t1 - NUEVO PEDIDO");
+            System.out.println("\t\t\t\t2 - LISTADO PEDIDOS");
             System.out.println("\t\t\t\t9 - CERRAR EL PROGRAMA");
 
             Opcion = sc.nextInt();
@@ -222,9 +190,40 @@ public class Tienda2026 {
         System.out.println("ALTA DE NUEVO ARTICULO");
         
         //idArticulo validado con EXPRESION REGULAR SENCILLA
+        do {            
+            System.out.println("IdArticulo (IDENTIFICADOR):");
+            idArticulo=sc.next();
+        } while (!idArticulo.matches("[1-5][-][0-9][0-9]") || articulos.containsKey(idArticulo));
+        //CONTROLAR FORMATIO id Y QUE NO EXISTA ESE ID PREVIAMENTE
         
         
+        
+        //Entrada descripcion sin ningun tipo de validacion
+            System.out.println("DESCRIPCION");
+            descripcion=sc.nextLine();
+            
+        //EXISTENCIAS CON VALIDACION TIPO int
+        do {            
+            existencias=sc.nextLine();
+        } while (!MetodosAux.esInt(existencias));
+        
+        
+        //PVP CON VALIDACION TIPO double
+        do {            
+            System.out.println("PVP: ");
+            pvp=sc.nextLine();
+        } while (!MetodosAux.esDouble(pvp));
+        
+        //AÑADO OBJETO ARTICULO A LA COLECCION PARSEANDO A int y double
+        Articulo a = new Articulo(idArticulo, descripcion,
+                Integer.parseInt(existencias), Double.parseDouble(pvp));
+        articulos.put (idArticulo,a);
+        System.out.println("- Articulo añadido -");
+        /*podría hacerse con una única instrucción: 
+        articulos.put(idArticulo, new Articulo (idArtiulo,descripcion,+
+        */
     }
+    
     
     
     private void bajaArticulos(){
@@ -289,5 +288,36 @@ public class Tienda2026 {
 //</editor-fold>
     
     
+    
+    // <editor-fold defaultstate="fold" desc="CARGA DATOS"> 
+    public void cargaDatos(){
+       clientes.put("80580845T",new Cliente("80580845T","ANA ","658111111","ana@gmail.com"));
+       clientes.put("36347775R",new Cliente("36347775R","LOLA","649222222","lola@gmail.com"));
+       clientes.put("63921307Y",new Cliente("63921307Y","JUAN","652333333","juan@gmail.com"));
+       clientes.put("02337565Y",new Cliente("02337565Y","EDU","634567890","edu@gmail.com"));
+              
+       articulos.put("1-11",new Articulo("1-11","RATON LOGITECH ST ",14,15));
+       articulos.put("1-22",new Articulo("1-22","TECLADO STANDARD  ",9,18));
+       articulos.put("2-11",new Articulo("2-11","HDD SEAGATE 1 TB  ",16,80));
+       articulos.put("2-22",new Articulo("2-22","SSD KINGSTOM 256GB",9,70));
+       articulos.put("2-33",new Articulo("2-33","SSD KINGSTOM 512GB",0,200));
+       articulos.put("3-22",new Articulo("3-22","EPSON PRINT XP300 ",5,80));
+       articulos.put("4-11",new Articulo("4-11","ASUS  MONITOR  22 ",5,100));
+       articulos.put("4-22",new Articulo("4-22","HP MONITOR LED 28 ",5,180));
+       articulos.put("4-33",new Articulo("4-33","SAMSUNG ODISSEY G5",12,580));
+       
+       LocalDate hoy = LocalDate.now();
+       pedidos.add(new Pedido("80580845T-001/2025",clientes.get("80580845T"),hoy.minusDays(1), new ArrayList<>
+        (List.of(new LineaPedido("1-11",3),new LineaPedido("4-22",3)))));                                                                                                                                                               
+       pedidos.add(new Pedido("80580845T-002/2025",clientes.get("80580845T"),hoy.minusDays(2), new ArrayList<>
+        (List.of(new LineaPedido("4-11",3),new LineaPedido("4-22",2),new LineaPedido("4-33",4)))));
+       pedidos.add(new Pedido("36347775R-001/2025",clientes.get("36347775R"),hoy.minusDays(3), new ArrayList<>
+        (List.of(new LineaPedido("4-22",1),new LineaPedido("2-22",3)))));
+       pedidos.add(new Pedido("36347775R-002/2025",clientes.get("36347775R"),hoy.minusDays(5), new ArrayList<>
+        (List.of(new LineaPedido("4-33",3),new LineaPedido("2-11",3)))));
+       pedidos.add(new Pedido("63921307Y-001/2025",clientes.get("63921307Y"),hoy.minusDays(4), new ArrayList<>
+        (List.of(new LineaPedido("2-11",5),new LineaPedido("2-33",3),new LineaPedido("4-33",2)))));
+    }
+    // </editor-fold>
     
 }
