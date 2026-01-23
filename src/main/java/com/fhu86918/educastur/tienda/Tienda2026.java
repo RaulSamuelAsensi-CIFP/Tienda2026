@@ -216,6 +216,13 @@ public class Tienda2026 {
     
     // <editor-fold defaultstate="fold" desc="ARTICULOS"> 
     private void altaArticulos(){
+        String idArticulo,descripcion,existencias,pvp; //Todas las
+        
+        sc.nextLine();
+        System.out.println("ALTA DE NUEVO ARTICULO");
+        
+        //idArticulo validado con EXPRESION REGULAR SENCILLA
+        
         
     }
     
@@ -279,31 +286,6 @@ public class Tienda2026 {
             System.out.println(p);
         }
     }
-//</editor-fold>
-    
-    
-    
-    //<editor-fold defaultstate="fold" desc="METODOS AUXILIARES">
-       public static boolean esInt(String s) {//metodo para transformar un string en un entero
-        int n;
-        try{
-            n=Integer.parseInt(s);
-            return true;//
-        }catch (NumberFormatException ex){
-            return false;
-        }
-    }
-    
-    public static boolean esDouble(String s) {//metodo para transformar un string en un double
-        double n;
-        try {
-            n = Double.parseDouble(s);
-            return true;
-        } catch (NumberFormatException ex) {
-            return false; 
-        }
-    }
-
 //</editor-fold>
     
     
