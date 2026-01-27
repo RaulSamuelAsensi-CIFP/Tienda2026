@@ -4,6 +4,7 @@
 
 package com.fhu86918.educastur.tienda;
 
+import java.net.ContentHandlerFactory;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,9 +34,10 @@ public class Tienda2026 {
     }
     
     public static void main(String[] args) {
+
         Tienda2026 t=new Tienda2026();
         t.cargaDatos();
-        t.menu();
+        t.menu();  
         
     }
     
@@ -83,7 +85,7 @@ public class Tienda2026 {
             System.out.println("\t\t\t\t2 - BAJA");
             System.out.println("\t\t\t\t3 - REPOSICION");
             System.out.println("\t\t\t\t3 - LISTADOS");
-            System.out.println("\t\t\t\t9 - SALIR");
+            System.out.println("\t\t\t\t9 - MENU PRINCIPAL");
 
             Opcion = sc.nextInt();
 
@@ -122,7 +124,7 @@ public class Tienda2026 {
             System.out.println("\t\t\t\t2 - BAJA");
             System.out.println("\t\t\t\t3 - MODIFICACION");
             System.out.println("\t\t\t\t3 - LISTADO");
-            System.out.println("\t\t\t\t9 - SALIR");
+            System.out.println("\t\t\t\t9 - MENU PRINCIPAL");
 
             Opcion = sc.nextInt();
 
@@ -158,7 +160,7 @@ public class Tienda2026 {
             System.out.println("\n\n\n\n\n\t\t\t\tMENU PRINCIPAL\n");
             System.out.println("\t\t\t\t1 - NUEVO PEDIDO");
             System.out.println("\t\t\t\t2 - LISTADO PEDIDOS");
-            System.out.println("\t\t\t\t9 - CERRAR EL PROGRAMA");
+            System.out.println("\t\t\t\t9 - MENU PRINCIPAL");
 
             Opcion = sc.nextInt();
 
@@ -275,10 +277,39 @@ public class Tienda2026 {
     
     
     //<editor-fold defaultstate="collapsed" desc="PEDIDOS">
-    private void nuevoPedido(){
+    
+    public String generaIdPedido(String idCliente){
+        String nuevoId;//variable String para ir construyendo un nuevo idPedido
+    //Calculamos en la variable contador cuantos pedidos tiene el cliente asociado
+        int contador = 0;
         
+        for (Pedido p : pedidos) {
+            if (p.getClientePedido().getIdCliente().equalsIgnoreCase(idCliente)){
+                contador++;
+            }
+        }
+        contador++; //sumamos a contador 1 para el nuevo pedido
+        nuevoId= idCliente + "-" + String.format("%03d", contador) + "/" + LocalDate.now().getYear();
+        return nuevoId;
+    }
+    
+    
+    
+    private void nuevoPedido(){
+        String idCliente;
+        do {            
+            System.out.println("DNI  (id) CLIENTE: ");
+            idCliente=sc.nextLine().toUpperCase();
+        } while (!MetodosAux.validarDNI(idCliente));
+        
+        
+        
+        
+        Pedido p = new Pedido(idPedido, clientePedido, LocalDate.EPOCH, cestaCompra);
+        pedidos.add(p);
     }
             
+    
     private void listadoPedidos(){
         System.out.println("Pedidos:");
         for (Pedido p : pedidos) {
