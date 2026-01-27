@@ -304,8 +304,20 @@ public class Tienda2026 {
         
         
         
+        //el new ArrayList (); sirve para inicializar la variable cestaCompra.add 
+        ArrayList <LineaPedido>cestaCompra = new ArrayList();
+        String idArticulo;
+        int unidades = 0;
+        do {            
+            System.out.print("\nTeclea el ID del articulod deseado (FIN para terminar la compra)");
+            idArticulo=sc.next();
+            System.out.print("\nTeclea las unidades que deseas comprar del articulo:");
+            unidades=sc.nextInt();
+            cestaCompra.add(new LineaPedido(idArticulo, unidades));
+        } while (!idArticulo.equalsIgnoreCase("FIN"));
         
-        Pedido p = new Pedido(idPedido, clientePedido, LocalDate.EPOCH, cestaCompra);
+        generaIdPedido(idCliente);
+        Pedido p = new Pedido(generaIdPedido(idCliente), clientes.get(idCliente), LocalDate.now(), cestaCompra);
         pedidos.add(p);
     }
             
