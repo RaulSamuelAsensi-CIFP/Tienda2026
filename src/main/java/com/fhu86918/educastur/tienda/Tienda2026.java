@@ -280,7 +280,7 @@ public class Tienda2026 {
     
     //<editor-fold defaultstate="collapsed" desc="PEDIDOS">
     
-    public String generaIdPedido(String idCliente){
+    private String generaIdPedido(String idCliente){
         String nuevoId;//variable String para ir construyendo un nuevo idPedido
     //Calculamos en la variable contador cuantos pedidos tiene el cliente asociado
         int contador = 0;
@@ -296,12 +296,29 @@ public class Tienda2026 {
     }
     
     
+    private void stock (String idArticulo, int unidades) throws StockCero, StockInsuficiente{
+        if (articulos.get(idArticulo).getExistencias()==0){
+            throw new StockCero("Cero unidades disponibles del articulo: " + articulos.get(idArticulo).getDescripcion());
+        }
+        if (articulos.get(idArticulo).getExistencias()<unidades){
+            throw new StockInsuficiente("Solo hay " + articulos.get(idArticulo).getExistencias()
+                    +"unidades desponibles de: " + articulos.get(idArticulo).getDescripcion());
+            
+        }
+        
+    }
+    
     
     private void nuevoPedido(){
+        sc.nextLine();
         String idCliente;
         do {            
             System.out.println("DNI  (id) CLIENTE: ");
             idCliente=sc.nextLine().toUpperCase();
+            if (!clientes.containsKey(idCliente)){
+                System.out.println("No es cliente de la tienda." 
+                        + " Desea darse de alta o comprar como invitado");
+            }
         } while (!MetodosAux.validarDNI(idCliente));
         
         
@@ -317,9 +334,10 @@ public class Tienda2026 {
             unidades=sc.nextInt();
             cestaCompra.add(new LineaPedido(idArticulo, unidades));
             System.out.println("\nTeclee el ID del articulo deseado (FIN para terminar la compra)");
+            idArticulo=sc.next();
         } while (!idArticulo.equalsIgnoreCase("FIN"));
         
-        if(cestaCompra.size()>0) {  //(!cestaCompra.isEmpty())
+        if(cestaCompra.size()>0) {   //(!cestaCompra.isEmpty())
         
         generaIdPedido(idCliente);
         Pedido p = new Pedido(generaIdPedido(idCliente), clientes.get(idCliente), LocalDate.now(), cestaCompra);
@@ -335,6 +353,7 @@ public class Tienda2026 {
             System.out.println(p);
         }
     }
+    
 //</editor-fold>
     
     
