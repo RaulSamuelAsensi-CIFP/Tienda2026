@@ -3,13 +3,15 @@
  */
 
 package com.fhu86918.educastur.tienda;
-
+//<editor-fold defaultstate="fold" desc="IMPORTS">
 import java.net.ContentHandlerFactory;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+//</editor-fold>
+
 
 /**
  *
@@ -314,12 +316,17 @@ public class Tienda2026 {
             System.out.print("\nTeclea las unidades que deseas comprar del articulo:");
             unidades=sc.nextInt();
             cestaCompra.add(new LineaPedido(idArticulo, unidades));
+            System.out.println("\nTeclee el ID del articulo deseado (FIN para terminar la compra)");
         } while (!idArticulo.equalsIgnoreCase("FIN"));
+        
+        if(cestaCompra.size()>0) {  //(!cestaCompra.isEmpty())
         
         generaIdPedido(idCliente);
         Pedido p = new Pedido(generaIdPedido(idCliente), clientes.get(idCliente), LocalDate.now(), cestaCompra);
         pedidos.add(p);
+        }
     }
+    
             
     
     private void listadoPedidos(){
