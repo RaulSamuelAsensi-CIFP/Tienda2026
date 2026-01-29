@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //</editor-fold>
 
 
@@ -301,8 +303,8 @@ public class Tienda2026 {
             throw new StockCero("Cero unidades disponibles del articulo: " + articulos.get(idArticulo).getDescripcion());
         }
         if (articulos.get(idArticulo).getExistencias()<unidades){
-            throw new StockInsuficiente("Solo hay " + articulos.get(idArticulo).getExistencias()
-                    +"unidades desponibles de: " + articulos.get(idArticulo).getDescripcion());
+            throw new StockInsuficiente("En este momento solo hay " + articulos.get(idArticulo).getExistencias()
+                    +"unidades desponibles del articulo: " + articulos.get(idArticulo).getDescripcion());
             
         }
         
@@ -332,13 +334,35 @@ public class Tienda2026 {
             idArticulo=sc.next();
             System.out.print("\nTeclea las unidades que deseas comprar del articulo:");
             unidades=sc.nextInt();
-            cestaCompra.add(new LineaPedido(idArticulo, unidades));
+            
+            try {
+                stock(idArticulo, unidades);
+                cestaCompra.add(new LineaPedido(idArticulo, unidades));
+            } catch (StockCero ex) {
+                System.out.println(ex.getMessage());
+            } catch (StockInsuficiente ex) {
+                System.out.println(ex.getMessage());
+                System.out.println("Las quieres (SI/NO)");
+                String respuesta=sc.next();
+                if (respuesta.equalsIgnoreCase("SI")) {
+                    cestaCompra.add(new LineaPedido(idArticulo, articulos.get(idArticulo).getExistencias()));
+                }
+            }
+            
             System.out.println("\nTeclee el ID del articulo deseado (FIN para terminar la compra)");
             idArticulo=sc.next();
+            
         } while (!idArticulo.equalsIgnoreCase("FIN"));
         
-        if(cestaCompra.size()>0) {   //(!cestaCompra.isEmpty())
-        
+        if(!cestaCompra.isEmpty()) {   
+            System.out.println("Este es tu pedido: ");
+            for (LineaPedido l : cestaCompra) {
+                System.out.println(l.getIdArticulo()); 
+            }
+            System.out.println("Procedemos con la compra SI/NO");
+            
+            
+            
         generaIdPedido(idCliente);
         Pedido p = new Pedido(generaIdPedido(idCliente), clientes.get(idCliente), LocalDate.now(), cestaCompra);
         pedidos.add(p);
