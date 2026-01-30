@@ -408,16 +408,16 @@ public class Tienda2026 {
         System.out.println("Pedidos:");
         for (Pedido p : pedidos) {
             System.out.println(p + " - Total: " + totalPedido(p));
-        }
+        
         System.out.println("\n");
-        pedidos.stream().sorted(Comparator.comparing(p->totalPedido(p)))
-                .forEach(p-> System.out.println(p + " - Total: " + totalPedido(p)));     //ordenación de pedidos según su precio, con una llamada al método totalPedido(p)
+        pedidos.stream().sorted(Comparator.comparing(p->totalPedido(Pedido p))/*.reversed()*/)   //con el método reversed te los ordena de menor a mayor
+                .forEach(p-> System.out.println(p + " - Total: " + totalPedido(p)));                //ordenación de pedidos según su precio, con una llamada al método totalPedido(p)
     }
         
     
     
             //libros.stream().sorted(Comparator.comparing(Libro::getTitulo)).forEach(l-> System.out.println(l));   -   Ejemplo de ordenación en biblioteca
-
+    }
     
 //</editor-fold>
     
