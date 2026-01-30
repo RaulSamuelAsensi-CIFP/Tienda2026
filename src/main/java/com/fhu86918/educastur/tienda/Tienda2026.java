@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Comparator;
 //</editor-fold>
 
 
@@ -311,6 +312,18 @@ public class Tienda2026 {
     }
     
     
+    //metodo que calcula el total de un pedido
+    private double totalPedido(Pedido p){
+        double totalPedido=0;
+        double totalLinea=0;
+        for (LineaPedido l: p.getCestaCompra()){
+            totalPedido+=l.getUnidades() * articulos.get(l.getIdArticulo()).getPvp(); //el metodo "+="; te va acumulando el precio de los articulos
+        }
+        return totalPedido;
+    }
+    
+    
+    
     private void nuevoPedido(){
         sc.nextLine();
         String idCliente;
@@ -329,10 +342,10 @@ public class Tienda2026 {
         ArrayList <LineaPedido>cestaCompra = new ArrayList();
         String idArticulo;
         int unidades = 0;
-        do {            
-            System.out.print("\nTeclea el ID del articulod deseado (FIN para terminar la compra)");
-            idArticulo=sc.next();
-            System.out.print("\nTeclea las unidades que deseas comprar del articulo:");
+        System.out.print("\nTecle el ID del artículo deseado (FIN para terminar la compra)");
+        idArticulo=sc.next();
+        while (!idArticulo.equalsIgnoreCase("FIN")){
+            System.out.print("\nTeclea las unidades deseadas: ");
             unidades=sc.nextInt();
             
             try {
@@ -351,36 +364,62 @@ public class Tienda2026 {
             
             System.out.println("\nTeclee el ID del articulo deseado (FIN para terminar la compra)");
             idArticulo=sc.next();
-            
-        } while (!idArticulo.equalsIgnoreCase("FIN"));
-        
-        if(!cestaCompra.isEmpty()) {   
-            System.out.println("Este es tu pedido: ");
+ 
+        }
+        //si te confirma el pedido, que te muestre: lo que pidio y el total de dinero
+        if (!cestaCompra.isEmpty()) {
+            System.out.println("\nEste es tu pedido:\n ");
+            double totalPedido = 0;
+            double totalLinea = 0;
             for (LineaPedido l : cestaCompra) {
-                System.out.println(l.getIdArticulo()); 
+                totalLinea = l.getUnidades() * articulos.get(l.getIdArticulo()).getPvp();
+                System.out.println(l.getIdArticulo() + " - "
+                        + articulos.get(l.getIdArticulo()).getDescripcion()
+                        + " - " + l.getUnidades()
+                        + " - (" articulos.get(l.getIdArticulo()).getPvp()
+                        + " - " + totalLinea);
+                totalPedido += totalLinea;
+                
             }
-            System.out.println("Procedemos con la compra SI/NO");
+            System.out.println("\t\t\t\tTotal:" + totalPedido);
+            System.out.println("\nProcedemos con la compra (SI/NO) ");
+            String respuesta=sc.next();  
+            if (respuesta.equalsIgnoreCase("SI")){
+                pedidos.add(new Pedido(generaIdPedido(idCliente), clientes.get(idCliente),
+                LocalDate.now(), cestaCompra));
+                for (LineaPedido l:cestaCompra){
+                    articulos.get(l.getIdArticulo())
+                            .setExistencias(articulos.get(l.getIdArticulo()).getExistencias()-l.getUnidades());                }
+                        
+            }
+        }
+
             
             
-            
-        generaIdPedido(idCliente);
+        generaIdPedido(idCliente);        
         Pedido p = new Pedido(generaIdPedido(idCliente), clientes.get(idCliente), LocalDate.now(), cestaCompra);
         pedidos.add(p);
-        }
     }
+    
     
             
     
     private void listadoPedidos(){
         System.out.println("Pedidos:");
         for (Pedido p : pedidos) {
-            System.out.println(p);
+            System.out.println(p + " - Total: " + totalPedido(p));
         }
+        System.out.println("\n");
+        pedidos.stream().sorted(Comparator.comparing(p->totalPedido(p)))
+                .forEach(p-> System.out.println(p + " - Total: " + totalPedido(p)));     //ordenación de pedidos según su precio, con una llamada al método totalPedido(p)
     }
+        
+    
+    
+            //libros.stream().sorted(Comparator.comparing(Libro::getTitulo)).forEach(l-> System.out.println(l));   -   Ejemplo de ordenación en biblioteca
+
     
 //</editor-fold>
-    
-    
     
     // <editor-fold defaultstate="fold" desc="CARGA DATOS"> 
     public void cargaDatos(){
