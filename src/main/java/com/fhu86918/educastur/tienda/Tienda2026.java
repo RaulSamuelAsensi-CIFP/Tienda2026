@@ -47,8 +47,8 @@ public class Tienda2026 {
         uno();
         dos();
         tres();
-        cuatro();
-        cinco();        
+        //cuatro();
+        //cinco();        
     
     }
     
@@ -527,36 +527,104 @@ private double totalPedido (Pedido p){
                 .filter(a-> a.getIdArticulo().startsWith(prefijo))
                 .forEach(a-> System.out.println(a));
         
-        
-        
+
+        System.out.println("");
+        ArrayList<Articulo> articulosAux = new ArrayList(articulos.values());
+        String idArticulo;
+        System.out.println("Articulos por ID");
+        System.out.print("\nTecle el primer digito del ID del artículo:");
+        idArticulo = sc.next();
+        articulosAux.stream()
+                .filter(a -> String.valueOf(a.getIdArticulo()).startsWith(idArticulo))
+                .sorted(Comparator.comparing(Articulo::getIdArticulo))
+                .forEach(System.out::println);
+ 
     }
     
 //</editor-fold>
 
     
     //<editor-fold defaultstate="collapsed" desc="EXAMEN 3/2/2026">
-    public static void uno() {
+    
+    ArrayList<Articulo> articulosAux = new ArrayList(articulos.values());
+    
+    
+    private void uno() {
+        System.out.println("");
+        String idArticulo;
+        idArticulo = sc.next();
+        articulosAux.stream()
+                .filter(a -> String.valueOf(a.getIdArticulo()).startsWith(idArticulo))
+                .sorted(Comparator.comparing(Articulo::getIdArticulo))
+                .forEach(a-> System.out.println(a));
+    }    
+    
+
+    private void dos() {
+        int perifericos = 1;        
+        String familia1 = perifericos + "1-";
+        int almacenamiento = 2;
+        String familia2 = almacenamiento + "2";
+        int impresoras = 3;
+        String familia3 = impresoras + "3-";
+        int monitores = 4;
+        String familia4 = monitores + "4-";
+
+                
+        System.out.println("PERIFERICOS");
+        articulosAux.stream()
+                .filter(b-> b.getIdArticulo().startsWith(familia1, perifericos))
+                .forEach(b->System.out.println(b));
+        
+        System.out.println("ALMACENAMIENTO");
+        articulosAux.stream()
+                .filter(c-> c.getIdArticulo().startsWith(familia2, almacenamiento))
+                .forEach(c->System.out.println(c)); 
+        
+        System.out.println("IMPRESORAS");
+        articulosAux.stream()
+                .filter(d-> d.getIdArticulo().startsWith(familia3, impresoras))
+                .forEach(d->System.out.println(d)); 
+        
+        System.out.println("MONITORES");
+        articulosAux.stream()
+                .filter(e-> e.getIdArticulo().startsWith(familia4, monitores))
+                .forEach(e->System.out.println(e));    }
+
+
+    public void tres() { //Pedidos de un cliente y total gastado
+        
+        int totalGastado = 0;
+        
+        for (Pedido p : pedidos) {
+            if (p.getClientePedido().getIdCliente().equalsIgnoreCase(idCliente)){
+                System.out.println("PEDIDOS DEL  CLIENTE " + p.getIdPedido());
+            }
+        }
+
+        System.out.println("\t\t\t\tTOTAL:" + totalPedido);
+
+    }        
+
+    
+
+
+    private static void cuatro() {//Listado de todos los articulos oredenados de mas a menos unidades vendidas
         
     }
 
-
-    public static void dos() {
-        
-    }
-
-
-    public static void tres() {
-        
-    }
-
-
-    public static void cuatro() {
-        
-    }
-
-
-    public static void cinco() {
-        
+ 
+    ArrayList<Cliente> clientesAux = new ArrayList(clientes.values());
+    private static void cinco() { //= Listado de clientes sin pedidos
+        for (Object object : col) {
+            
+        }
     }
 //</editor-fold>
+    
+    
+    
+    //<editor-fold defaultstate="collapsed" desc="SOLUCION EXAMEN 5/2/2026">
+
+    //</editor-fold>
 }
