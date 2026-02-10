@@ -22,15 +22,29 @@ import java.util.Comparator;
  */
 public class Tienda2026 {
 
+    // <editor-fold defaultstate="collapsed" desc="CLASE TIENDA 2026">
     private static Scanner sc=new Scanner(System.in);
     private ArrayList<Pedido> pedidos;
     private HashMap <String, Articulo> articulos;
     private HashMap <String, Cliente> clientes;
-    /*
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
-    ...
+
+    public static Scanner getSc() {
+        return sc;
+    }
+
+    public ArrayList<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public HashMap<String, Articulo> getArticulos() {
+        return articulos;
+    }
+
+    public HashMap<String, Cliente> getClientes() {
+        return clientes;
+    }
     // </editor-fold>
-    */
+    
     
     public Tienda2026() {
         pedidos=new ArrayList();
@@ -351,7 +365,7 @@ public class Tienda2026 {
     
     
     //metodo que calcula el total de un pedido
-private double totalPedido (Pedido p){
+public double totalPedido (Pedido p){
         double totalPedido=0;
         for (LineaPedido l: p.getCestaCompra()){
             totalPedido+= l.getUnidades()* articulos.get(l.getIdArticulo()).getPvp();//el metodo "+="; te va acumulando el precio de los articulos
@@ -489,8 +503,7 @@ private double totalPedido (Pedido p){
     // </editor-fold>
     
     
-
-
+    
     //<editor-fold defaultstate="collapsed" desc="EJERCICIOS DE FILTRADO">
     private void articulosCeroExistencias(){
         articulos.values().stream()
