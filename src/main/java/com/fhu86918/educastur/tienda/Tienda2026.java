@@ -82,17 +82,11 @@ public class Tienda2026 {
             Opcion = sc.nextInt();
 
             switch (Opcion) {
-                case 1:
-                    menuArticulos();
-                    break;
+                case 1 -> menuArticulos();
                     
-                case 2:
-                    menuClientes();
-                    break;
+                case 2 -> menuClientes();
                     
-                case 3:
-                    menuPedidos();
-                    break;
+                case 3 -> menuPedidos();
                     
             }
         }while (Opcion != 9);
@@ -115,25 +109,15 @@ public class Tienda2026 {
             Opcion = sc.nextInt();
 
             switch (Opcion) {
-                case 1:
-                    altaArticulos();
-                    break;
+                case 1 -> altaArticulos();
                     
-                case 2:
-                    bajaArticulos();
-                    break;
+                case 2 -> bajaArticulos();
                     
-                case 3:
-                    reposicionArticulos();
-                    break;
+                case 3 -> reposicionArticulos();
                     
-                case 4:
-                    listarArticulos();
-                    break;
+                case 4 -> listarArticulos();
                     
-                case 9:
-                    menu();
-                    break;                    
+                case 9 -> menu();                    
             }
         }while (Opcion != 9);
         System.out.println("Saliendo del programa...");
@@ -154,24 +138,14 @@ public class Tienda2026 {
             Opcion = sc.nextInt();
 
             switch (Opcion) {
-                case 1:
-                    altaClientes();
-                    break;
+                case 1 -> altaClientes();
                     
-                case 2:
-                    bajaClientes();
-                    break;
+                case 2 -> bajaClientes();
                     
-                case 3:
-                    modificacionClientes();
-                    break;
+                case 3 -> modificacionClientes();
                     
-                case 4:
-                    listaClientes();
-                    break;
-                case 9:
-                    menu();
-                    break;
+                case 4 -> listaClientes();
+                case 9 -> menu();
             }
         }while (Opcion != 9);
         System.out.println("Saliendo del programa...");
@@ -190,17 +164,11 @@ public class Tienda2026 {
             Opcion = sc.nextInt();
 
             switch (Opcion) {
-                case 1:
-                    nuevoPedido();
-                    break;
+                case 1 -> nuevoPedido();
                     
-                case 2:
-                    listadoPedidos();
-                    break;
+                case 2 -> listadoPedidos();
                     
-                case 9:
-                    menu();
-                    break;
+                case 9 -> menu();
             }
         }while (Opcion != 9);
         System.out.println("Saliendo del programa...");
