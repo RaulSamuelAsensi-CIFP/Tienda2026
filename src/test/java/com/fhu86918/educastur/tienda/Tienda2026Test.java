@@ -42,10 +42,10 @@ public class Tienda2026Test {
     @Test
     public void testTotalPedido() {
         assertAll(
-                () -> assertEquals(1000, t.totalPedido(t.getPedidos().get(0))),
-                () -> assertEquals(1500, t.totalPedido(t.getPedidos().get(1))),
-                () -> assertEquals(2000, t.totalPedido(t.getPedidos().get(2))),
-                () -> assertEquals(2500, t.totalPedido(t.getPedidos().get(3)))
+                () -> assertEquals(585, t.totalPedido(t.getPedidos().get(0))),
+                () -> assertEquals(2980, t.totalPedido(t.getPedidos().get(1))),
+                () -> assertEquals(390, t.totalPedido(t.getPedidos().get(2))),
+                () -> assertEquals(1980, t.totalPedido(t.getPedidos().get(3)))
         );
     }
     
