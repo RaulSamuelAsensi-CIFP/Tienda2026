@@ -5,6 +5,7 @@
 package com.fhu86918.educastur.tienda;
 //<editor-fold defaultstate="fold" desc="IMPORTS">
 import java.net.ContentHandlerFactory;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +14,8 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Comparator;
+import java.util.Map;
+import java.util.stream.Collectors;
 //</editor-fold>
 
 
@@ -522,14 +525,34 @@ public class Tienda2026 {
                 .forEach(System.out::println);
         
         
+        long numPedidos= pedidos.stream()
+                .filter(p -> p.getClientePedido().getIdCliente().equalsIgnoreCase("80580845T"))
+                .count();
+        System.out.println(numPedidos);
         
- 
+        long numPedidos2=0;
+        for (Pedido p : pedidos) {
+            if(p.getClientePedido().getIdCliente().equalsIgnoreCase("80580845T")){
+                numPedidos2++;
+            }
+        }
+        System.out.println("\n: " + numPedidos2);
+        
+        
+        Map<Cliente, Long> numPedidosPorCliente = 
+                pedidos.stream()
+                .collect(Collectors.groupingBy(Pedido::getClientePedido, Collectors.counting()));
+        System.out.println("\n: " + numPedidosPorCliente.keySet());
+        
+        
     }
+    
+    
     
 //</editor-fold>
     
     
-    
+   
     //<editor-fold defaultstate="collapsed" desc="SOLUCION EXAMEN 5/2/2026">
     
     /*private void uno(){
