@@ -484,7 +484,7 @@ public class Tienda2026 {
         System.out.println("Articulos de menos de 100 euros, ordenados por precio");
         articulos.values().stream()
                 .filter(a->a.getPvp()<100)
-                .sorted(Comparator.comparing(Articulo::getPvp))
+                .sorted(Comparator.comparing(a-> a.getPvp()))
                 .forEach(a->System.out.println(a));
         
         System.out.println("Filtrar artículos con stock superior a un valor dado");
@@ -520,6 +520,9 @@ public class Tienda2026 {
                 .filter(a -> String.valueOf(a.getIdArticulo()).startsWith(idArticulo))
                 .sorted(Comparator.comparing(Articulo::getIdArticulo))
                 .forEach(System.out::println);
+        
+        
+        
  
     }
     
@@ -729,5 +732,5 @@ public class Tienda2026 {
 
 
 //</editor-fold>
-
+    
 }
