@@ -62,7 +62,7 @@ public class Tienda2026 {
         dos();
         tres();
         cuatro();
-        cinco();*/        
+        cinco();*/
     
     }
     
@@ -529,7 +529,7 @@ public class Tienda2026 {
     
     //<editor-fold defaultstate="collapsed" desc="SOLUCION EXAMEN 5/2/2026">
     
-    private void uno(){
+    /*private void uno(){
         String[] secciones={"","PERIFERICOS","ALMACENAMIENTO","IMPRESORAS","MONITORES"};
         System.out.println("SECCION A LISTAR:");
         String sec=sc.next();
@@ -615,7 +615,7 @@ public class Tienda2026 {
         int c=0;
         for (Pedido p:pedidos){
             for (LineaPedido l:p.getCestaCompra()){
-                if (l.getArticulo().equals(a.getIdArticulo())){
+                if (l.getArticulo().equals(a)){
                     c+=l.getUnidades();
                 }
             }
@@ -644,7 +644,7 @@ public class Tienda2026 {
             System.out.println(c);
         }
     }
-    
+    */
     //</editor-fold>
     
     
