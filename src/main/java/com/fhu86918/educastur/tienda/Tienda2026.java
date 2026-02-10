@@ -44,11 +44,11 @@ public class Tienda2026 {
         t.cargaDatos();
         //t.menu;
     
-        uno();
+        /*uno();
         dos();
         tres();
-        //cuatro();
-        //cinco();        
+        cuatro();
+        cinco();*/        
     
     }
     
@@ -542,11 +542,127 @@ private double totalPedido (Pedido p){
     }
     
 //</editor-fold>
+    
+    
+    
+    //<editor-fold defaultstate="collapsed" desc="SOLUCION EXAMEN 5/2/2026">
+    
+    private void uno(){
+        String[] secciones={"","PERIFERICOS","ALMACENAMIENTO","IMPRESORAS","MONITORES"};
+        System.out.println("SECCION A LISTAR:");
+        String sec=sc.next();
+        System.out.println("ARTICULOS DE LA SECCION " + secciones[Integer.parseInt(sec)] +":");
+        
+        //CON Bucle FOR-EACH 
+        for(Articulo a:articulos.values()){
+            if (a.getIdArticulo().startsWith(sec)){
+                System.out.println(a);
+            }
+        }
+        System.out.println("");
+        
+        //CON STREAMS
+        articulos.values().stream()
+                .filter(a->a.getIdArticulo().startsWith(sec))
+                .forEach(a->System.out.println(a));
+        
+    }
+    
+    //LISTADO DE TODOS LOS ARTICULOS CLASIFICADOS POR SECCIONES
+    private void dos() {
+        String[] secciones={"","PERIFERICOS","ALMACENAMIENTO","IMPRESORAS","MONITORES"};
+        for (int i=1; i<=4;i++){
+            System.out.println(secciones[i]);
+            String prefijo = Integer.toString(i);
+            
+            
+            articulos.values().stream().filter(a -> a.getIdArticulo().startsWith(prefijo)).forEach(System.out::println);
+        }
+    }
+    
+    
+    //Dado un cliente mostrar sus pedidos junto con el importe de cada uno
+    //y también el total gastado por el usuario en la tienda
+    //validar si el dni introducido es correcto y si es cliente de la tienda
+    private void tres(){
+        String dni;
+        do{
+            System.out.println("DNI CLIENTE:");
+            dni=sc.nextLine().toUpperCase();
+        }while (!MetodosAux.validarDNI(dni));
+        if (clientes.containsKey(dni)){
+            float total=0;
+            System.out.println("PEDIDOS DEL CLIENTE " + clientes.get(dni).getNombre() +":");
+            for (Pedido p:pedidos){
+                if (p.getClientePedido().getIdCliente().equals(dni)){
+                    System.out.println(p + "\tTOTAL: " + totalPedidoExam(p));
+                    total += totalPedidoExam(p);
+                }
+            }
+            System.out.println("\nTOTAL GASTADO: " + total);
+        }else{
+            System.out.println("ESE CLIENTE NO EXISTE");
+        }
+    }
+    
+    private double totalPedidoExam (Pedido p){
+        double totalPedido=0;
+        for (LineaPedido l: p.getCestaCompra()){
+            totalPedido+= l.getUnidades()* articulos.get(l.getIdArticulo()).getPvp();
+        }
+        return totalPedido;
+    }
+    
+    //LISTADO DE LOS ARTICULOS ORDENADOS DE MAYOR A MENOR POR UNIDADES VENDIDAS. SE APOYA EN EL METODO unidadesVendidas()
+    private void cuatro() {
+        System.out.println("LISTADO ARTICULOS - UNIDADES VENDIDAS:\n"); 
+        articulos.values().stream()
+            .sorted(Comparator.comparing(a -> unidadesVendidas((Articulo) a)).reversed())
+            .forEach(a -> System.out.println("\t" + a.getDescripcion() + "\tVENDIDAS: " + unidadesVendidas(a))); 
+    }
 
+   
+    private int unidadesVendidas (Articulo a){
+        int c=0;
+        for (Pedido p:pedidos){
+            for (LineaPedido l:p.getCestaCompra()){
+                if (l.getIdArticulo().equals(a.getIdArticulo())){
+                    c+=l.getUnidades();
+                }
+            }
+        }
+        return c;
+    }
+
+    //Crear un ArrayList ClientesSIN con los clientes que no han hecho ningún pedido e imprimirlo
+    private void cinco() {
+        ArrayList<Cliente> clientesSIN=new ArrayList();
+       
+        for (Cliente c:clientes.values()){
+            int cont=0;
+            for (Pedido p:pedidos){
+                if (p.getClientePedido().equals(c)){
+                    cont++;
+                    break;
+                }
+            }
+            if (cont==0){
+                clientesSIN.add(c);
+            }
+        }
+        System.out.println("LISTADO CLIENTES SIN PEDIDOS:\n");
+        for (Cliente c:clientesSIN){
+            System.out.println(c);
+        }
+    }
+    
+    //</editor-fold>
+    
+    
     
     //<editor-fold defaultstate="collapsed" desc="EXAMEN 3/2/2026">
     
-    ArrayList<Articulo> articulosAux = new ArrayList(articulos.values());
+/*    ArrayList<Articulo> articulosAux = new ArrayList(articulos.values());
     
     
     private void uno() {
@@ -619,12 +735,10 @@ private double totalPedido (Pedido p){
         for (Object object : col) {
             
         }
-    }
-//</editor-fold>
-    
-    
-    
-    //<editor-fold defaultstate="collapsed" desc="SOLUCION EXAMEN 5/2/2026">
+    }*/
 
-    //</editor-fold>
+
+
+//</editor-fold>
+
 }
