@@ -9,20 +9,20 @@ package com.fhu86918.educastur.tienda;
  * @author 1dawd
  */
 public class LineaPedido {
-    private String idArticulo;
+    private Articulo articulo;
     private int unidades;
 
-    public LineaPedido(String idArticulo, int unidades) {
-        this.idArticulo = idArticulo;
+    public LineaPedido(Articulo idArticulo, int unidades) {
+        this.articulo = articulo;
         this.unidades = unidades;
     }
 
-    public String getIdArticulo() {
-        return idArticulo;
+    public Articulo getArticulo() {
+        return articulo;
     }
 
-    public void setIdArticulo(String idArticulo) {
-        this.idArticulo = idArticulo;
+    public void setArticulo(Articulo Articulo) {
+        this.articulo = Articulo;
     }
 
     public int getUnidades() {
@@ -32,12 +32,14 @@ public class LineaPedido {
     public void setUnidades(int unidades) {
         this.unidades = unidades;
     }
+
+    
     
     
 
     @Override
     public String toString() {
-        return "LineaPedido{" + "idArticulo=" + idArticulo + ", unidades=" + unidades + '}';
+        return "LineaPedido{" + "idArticulo=" + articulo + ", unidades=" + unidades + '}';
     }
     
     
