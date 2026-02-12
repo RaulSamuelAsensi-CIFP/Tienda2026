@@ -57,8 +57,8 @@ public class Tienda2026 {
     
     public static void main(String[] args) {
 
-        Tienda2026 t=new Tienda2026();
-        t.cargaDatos();
+        Tienda2026 t2026 = new Tienda2026();
+        t2026.cargaDatos();
         //t.menu;
     
         /*uno();
@@ -66,7 +66,7 @@ public class Tienda2026 {
         tres();
         cuatro();
         cinco();*/
-    
+        System.out.println(t2026.unidadesVendidas1(t2026.articulos));
     }
     
     
@@ -524,25 +524,37 @@ public class Tienda2026 {
                 .sorted(Comparator.comparing(Articulo::getIdArticulo))
                 .forEach(System.out::println);
         
-        
+        //EJERCICIOS CON METODOS DEL API DE STREAMS     --->    count(); collect(); mapToInt(); .collect(Collectors); 
         long numPedidos= pedidos.stream()
                 .filter(p -> p.getClientePedido().getIdCliente().equalsIgnoreCase("80580845T"))
                 .count();
-        System.out.println(numPedidos);
+        System.out.println("\n" + numPedidos + "\n");
+        //Las funciones tipo "count()" / "counting()" almacenan resultados en variables de tipo long 
         
-        long numPedidos2=0;
-        for (Pedido p : pedidos) {
-            if(p.getClientePedido().getIdCliente().equalsIgnoreCase("80580845T")){
-                numPedidos2++;
-            }
-        }
-        System.out.println("\n: " + numPedidos2);
-        
-        
+        //CONTABILIZAR CUANTOS PEDIDOS HAY POR CLIENTE - PARA LAS AGRUPACIONES SON IDEALES
         Map<Cliente, Long> numPedidosPorCliente = 
                 pedidos.stream()
                 .collect(Collectors.groupingBy(Pedido::getClientePedido, Collectors.counting()));
-        System.out.println("\n: " + numPedidosPorCliente.keySet());
+        
+        
+/*for (Cliente c::numPedidosPorCliente.keySet()){
+    System.out.println(c + " - " + numPedidosPorCliente.get(c));
+}*/
+        
+        
+        System.out.println("\n");
+        for (Articulo a : articulos.values()){
+            int total = 0;
+            for (Pedido p : pedidos){
+                total += p.getCestaCompra().stream().filter(l -> l.getArticulo().equals(a))
+                        .mapToInt(LineaPedido::getUnidades).sum();
+            }
+            System.out.println(a + " - " + total);
+        }
+        
+
+        
+        
         
         
     }
@@ -552,7 +564,43 @@ public class Tienda2026 {
 //</editor-fold>
     
     
-   
+    
+    //<editor-fold defaultstate="collapsed" desc="Ejercicio hecho en clase 12/02/2026">
+    
+    
+    private int unidadesVendidas1 (Articulo a){
+        int c = 0;
+        for (Pedido p : pedidos){
+                for (LineaPedido l:p.getCestaCompra()){
+                    if (l.getArticulo().equals(a)){
+                    c += l.getUnidades();
+                }   
+            }
+        } return c;
+    }
+    
+    
+    private int unidadesVendidas2 (Articulo a){
+        int total = 0;
+        for (Pedido p : pedidos){
+            total += p.getCestaCompra().stream().filter(l -> l.getArticulo().equals(a))
+                    .mapToInt(LineaPedido::getUnidades).sum();
+        }
+        return total;
+    }
+    
+    //Importante el flatMap ----- Nos "aplana" la cesta de la compra para poder convertirla en stream
+    private int unidadesVendidas3 (Articulo a){
+        return pedidos.stream().flatMap(p -> p.getCestaCompra().stream())//Muy importante esta primera línea. Le pedimos que nos procese todas las lineas de pedido de todos los pedidos de la tienda. Saltamos de cestaCompra a Pedidos. Tenemos cada pedido de las lineas de pedido de la tienda
+                .filter(l -> l.getArticulo().equals(a))
+                .mapToInt(LineaPedido::getUnidades).sum();
+    }
+    
+    
+//</editor-fold>    
+    
+    
+            
     //<editor-fold defaultstate="collapsed" desc="SOLUCION EXAMEN 5/2/2026">
     
     /*private void uno(){
