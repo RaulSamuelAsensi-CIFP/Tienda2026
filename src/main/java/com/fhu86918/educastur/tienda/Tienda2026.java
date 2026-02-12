@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Comparator;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 //</editor-fold>
 
@@ -66,7 +67,9 @@ public class Tienda2026 {
         tres();
         cuatro();
         cinco();*/
-        System.out.println(t2026.unidadesVendidas1(t2026.articulos));
+        //System.out.println(t2026.unidadesVendidas1(t2026.articulos));
+        //System.out.println(t2026.unidadesVendidas2(t2026.articulos));
+        //System.out.println(t2026.unidadesVendidas3(t2026.articulos));
     }
     
     
@@ -554,8 +557,14 @@ public class Tienda2026 {
         
 
         
-        
-        
+    //TODOS LOS ARTICULOS VENDIDOS
+    System.out.println("\n");
+    
+    Set <Articulo> articulosVendidos =
+            pedidos.stream()
+            .flatMap(p -> p.getCestaCompra().stream())
+            .map(LineaPedido::getArticulo)
+            .collect(Collectors.toSet());
         
     }
     
@@ -567,7 +576,12 @@ public class Tienda2026 {
     
     //<editor-fold defaultstate="collapsed" desc="Ejercicio hecho en clase 12/02/2026">
     
+    /*
+        METODOS PARA CALCULAR LAS UNIDADES VENDIDAS DE UN ARTICULO 
+        EN TODOS LOS PEDIDOS DE LA TIENDA
+    */
     
+    //VERSION CLASEICA
     private int unidadesVendidas1 (Articulo a){
         int c = 0;
         for (Pedido p : pedidos){
@@ -579,7 +593,7 @@ public class Tienda2026 {
         } return c;
     }
     
-    
+    //VERSION SEMI-CLASICA, UTILIZANDO STREAMS SOLO PARA LA cestaCompra de cada pedido de la tienda
     private int unidadesVendidas2 (Articulo a){
         int total = 0;
         for (Pedido p : pedidos){
@@ -589,12 +603,20 @@ public class Tienda2026 {
         return total;
     }
     
+    
+    //VERSION DE PROGRAMACION FUNCIONAL CON flatMap() para aplanar los streams
     //Importante el flatMap ----- Nos "aplana" la cesta de la compra para poder convertirla en stream
     private int unidadesVendidas3 (Articulo a){
-        return pedidos.stream().flatMap(p -> p.getCestaCompra().stream())//Muy importante esta primera línea. Le pedimos que nos procese todas las lineas de pedido de todos los pedidos de la tienda. Saltamos de cestaCompra a Pedidos. Tenemos cada pedido de las lineas de pedido de la tienda
+        return pedidos.stream().flatMap(p -> p.getCestaCompra().stream())//Muy importante esta primera línea. Le pedimos que nos procese todas las lineasPedido de la cestaCompra de cada Pedido de la tienda. Saltamos de cestaCompra a Pedidos. Tenemos cada pedido de las lineas de pedido de la tienda
                 .filter(l -> l.getArticulo().equals(a))
                 .mapToInt(LineaPedido::getUnidades).sum();
     }
+    
+    //TODOS LOS ARTICULOS
+    System.out.println("\n");
+    
+    
+    
     
     
 //</editor-fold>    
@@ -803,5 +825,9 @@ public class Tienda2026 {
 
 
 //</editor-fold>
+
+    public void setPedidos(ArrayList<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
     
 }
