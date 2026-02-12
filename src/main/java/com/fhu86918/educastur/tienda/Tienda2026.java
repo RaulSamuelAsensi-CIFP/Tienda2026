@@ -67,9 +67,9 @@ public class Tienda2026 {
         tres();
         cuatro();
         cinco();*/
-        //System.out.println(t2026.unidadesVendidas1(t2026.articulos));
-        //System.out.println(t2026.unidadesVendidas2(t2026.articulos));
-        //System.out.println(t2026.unidadesVendidas3(t2026.articulos));
+        //System.out.println(t2026.unidadesVendidas1(t2026.articulos));     //falta completarlo
+        //System.out.println(t2026.unidadesVendidas2(t2026.articulos));     //falta completarlo
+        //System.out.println(t2026.unidadesVendidas3(t2026.articulos));     //falta completarlo
     }
     
     
@@ -557,19 +557,37 @@ public class Tienda2026 {
         
 
         
-    //TODOS LOS ARTICULOS VENDIDOS
+    //TODOS LOS ARTICULOS VENDIDOS SIN REPETICIONES     ------>     Set no admite elementos repetidos por lo que no imprimira por pantalla más de una vez el mismo artículo vendido
+
     System.out.println("\n");
-    
-    Set <Articulo> articulosVendidos =
-            pedidos.stream()
+    Set <Articulo> articulosVendidos =                                  pedidos.stream()
             .flatMap(p -> p.getCestaCompra().stream())
             .map(LineaPedido::getArticulo)
             .collect(Collectors.toSet());
         
+    articulosVendidos.stream().forEach(System.out::println);
+    
+    
+    
+    
+    
+    /*
+        //TOTAL DE UNIDADES VENDIDAS DE TODOS LOS ARTÍCULOS usando flatMap()
+        System.out.println("\n");
+        Map <Articulo, Integer> unidadesPorArticulo = 
+        pedidos.stream()
+                .flatMap(p -> p.getCestaCompra());
+    */
+
+    
+    
+    
+    
+    
+    //--------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
     }
-    
-    
-    
 //</editor-fold>
     
     
@@ -612,8 +630,6 @@ public class Tienda2026 {
                 .mapToInt(LineaPedido::getUnidades).sum();
     }
     
-    //TODOS LOS ARTICULOS
-    System.out.println("\n");
     
     
     
