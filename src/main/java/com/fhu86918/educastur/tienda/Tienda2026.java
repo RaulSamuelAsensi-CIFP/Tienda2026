@@ -62,7 +62,15 @@ public class Tienda2026 {
         Tienda2026 t2026 = new Tienda2026();
         t2026.cargaDatos();
         //t.menu;
-    
+        //t2026.ejercicio1(t2026.articulos);
+        //t2026.ejercicio2(t2026.articulos);        
+        //t2026.ejercicio3(t2026.articulos);        
+        //t2026.ejercicio4(t2026.articulos);       
+        //t2026.ejercicio5(t2026.articulos);     
+        //t2026.ejercicio6(t2026.articulos);        
+        //t2026.ejercicio7(t2026.articulos);        
+        t2026.ejercicio9(t2026.articulos);
+
         /*uno();
         dos();
         tres();
@@ -858,10 +866,10 @@ public class Tienda2026 {
     
     
     
-    //<editor-fold defaultstate="collapsed" desc="EJERCICIOS EN CONJUNTO DE METODOS Y API DE STREAMS">
+    //<editor-fold defaultstate="collapsed" desc="EJERCICIOS EN CONJUNTO DE METODOS Y API DE STREAMS BASICOS">
     
-    
-    private void Ejercicio1 (){
+        
+    private void ejercicio1 (HashMap<String, Articulo> articulos1){
         
         // Mostrar por pantalla todos los artículos (uno por línea) usando articulos.values().stream().forEach(...)
         System.out.println("");
@@ -869,28 +877,32 @@ public class Tienda2026 {
         
     }
     
-    private void Ejercicio2 (){
+    private void ejercicio2 (HashMap<String, Articulo> articulos2){
         
         //Listar artículos con existencias 0 (o <=0 si lo prefieres) usando filter.
-        
+        System.out.println("");
+                
         articulos.values().stream()
                 .filter(a -> a.getExistencias() < 1)
                 .forEach(a -> System.out.println(a));
     }
     
-    private void Ejercicio3 () {
+    private void ejercicio3 (HashMap<String, Articulo> articulos3) {
         
         //Listar artículos con PVP < 100 ordenados por PVP ascendente (sorted(Comparator.comparing(...))).
-        
+        System.out.println("");
+                
         articulos.values().stream()
                 .filter(a -> a.getPvp() < 100)
                 .sorted(Comparator.comparing(Articulo::getPvp))
                 .forEach(a -> System.out.println(a));
     }
     
-    private void Ejercicio4 (){
+    private void ejercicio4 (HashMap<String, Articulo> articulos4){
         
         //Listar artículos con PVP < 100 ordenados por PVP descendente (reversed).
+        System.out.println("");
+                
         articulos.values().stream()
                 .filter(a -> a.getPvp() < 100)
                 .sorted(Comparator.comparing(Articulo::getPvp).reversed())
@@ -898,8 +910,9 @@ public class Tienda2026 {
     }
     
     
-    private void Ejercicio5 (){
+    private void ejercicio5 (HashMap<String, Articulo> articulos5){
         //Pedir un número n y listar artículos con existencias > n (solo filter + forEach).
+        System.out.println("");
         
         int n = sc.nextInt();
         
@@ -909,9 +922,10 @@ public class Tienda2026 {
     }
     
     
-    private void Ejercicio6 (){
+    private void ejercicio6 (HashMap<String, Articulo> articulos6){
         //Pedir min y max y listar artículos cuyo PVP esté entre ambos (incluidos).
-
+        System.out.println("");
+        
         int max = sc.nextInt();
         int min = sc.nextInt();
         
@@ -922,20 +936,175 @@ public class Tienda2026 {
     }
         
         
-    private void Ejercicio7 (){
+    private void ejercicio7 (HashMap<String, Articulo> articulos7){
+        //Pedir un “prefijo de sección” (por ejemplo "4-") y listar artículos cuyo id empieza por ese prefijo (startsWith).
+        System.out.println("");
         
+        String sec = sc.next();
+        
+        articulos.values().stream()
+                .filter(a -> a.getIdArticulo().startsWith(sec))
+                .forEach(a -> System.out.println(a));
     }
             
             
-    private void Ejercicio8 (){
+    private void ejercicio8 (HashMap<String, Articulo> articulos8){
+        System.out.println("");
+        
+        //Contar cuántos clientes hay en la tienda (stream sobre clientes.values() + count).
+        long ejercicio8 = clientes.values().stream()
+                .count();
+        System.out.println("\n" + ejercicio8 + "\n");
         
     }
     
     
-    private void Ejercicio9 (){
+    private void ejercicio9 (HashMap<String, Articulo> articulos9){
+        System.out.println("");
+
+//Listar los DNIs de clientes usando clientes.keySet() (sin streams) y luego repetirlo con streams sobre keySet().stream().
+/*        System.out.println("DNI clientes con .keySet: ");
+            for (String dni : clientes.keySet()) {
+                System.out.println(dni);
+            }
+*/        
+        System.out.println("Con streams: ");
+        
+        clientes.values().stream()
+                .forEach(c -> System.out.println(c.getIdCliente()));
+    }
+    
+    
+
+    
+/*
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+            //EJERCICIOS CON METODOS DEL API DE STREAMS     --->    count(); collect(); mapToInt(); .collect(Collectors); 
+        long numPedidos= pedidos.stream()
+                .filter(p -> p.getClientePedido().getIdCliente().equalsIgnoreCase("80580845T"))
+                .count();
+        System.out.println("\n" + numPedidos + "\n");
+        //Las funciones tipo "count()" / "counting()" almacenan resultados en variables de tipo long 
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        //CONTABILIZAR CUANTOS PEDIDOS HAY POR CLIENTE - PARA LAS AGRUPACIONES SON IDEALES
+        Map<Cliente, Long> numPedidosPorCliente = 
+                pedidos.stream()
+                .collect(Collectors.groupingBy(Pedido::getClientePedido, Collectors.counting()));
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+*/
+//</editor-fold>
+    
+    
+    //<editor-fold defaultstate="collapsed" desc="EJERCICIOS EN CONJUNTO DE METODOS Y API DE STREAMS MEDIO">
+    
+    
+    private void ejercicioMedio0(){
+        //Contar cuántos pedidos ha hecho un cliente concreto (filtra por p.getClientePedido().getIdCliente() y count)
+        System.out.println("");
+        
+        String dni = sc.next();
+        
+        long numeroPedidosDeUnClienteConcreto =
+                pedidos.stream()
+                .filter(p -> p.getClientePedido().getIdCliente().equalsIgnoreCase(dni))
+                .count();
+            System.out.println("\n" + numeroPedidosDeUnClienteConcreto + "\n");
+            
+    }
+    
+    private void ejercicioMedio1(){
+//Sacar el conjunto (Set) de artículos vendidos (sin repetidos) y de los que aún queden unidades disponibles
+//a partir de todos los pedidos usando flatMap + map(LineaPedido::getArticulo) + toSet.
+        System.out.println("");
+        
+    Set <Articulo> ejercicioMedio1 =                                  
+            pedidos.stream()
+            .flatMap(p -> p.getCestaCompra().stream())
+            .map(LineaPedido::getArticulo)
+            .collect(Collectors.toSet());
         
     }
     
+    private void ejercicioMedio2(){
+//Sacar el conjunto (Set) de clientes que han realizado al menos un pedido 
+//(a partir de pedidos.stream().map(Pedido::getClientePedido).collect(toSet())).
+        System.out.println("");
+        
+        
+        
+    }
+    
+    private void ejercicioMedio3(){
+        //
+        System.out.println("");
+    }
+    
+    private void ejercicioMedio4(){
+        //
+        System.out.println("");
+    }
+    
+    private void ejercicioMedio5(){
+        //
+        System.out.println("");
+    }
+    
+    private void ejercicioMedio6(){
+        //
+        System.out.println("");
+    }
+    
+    private void ejercicioMedio7(){
+        //
+        System.out.println("");
+    }
+    
+    private void ejercicioMedio8(){
+        //
+        System.out.println("");
+    }
+    
+    private void ejercicioMedio9(){
+        //
+        System.out.println("");
+    }
+    
+    private void ejercicioMedio10(){    
+        //
+        System.out.println("");
+    }
+    
+    private void ejercicioMedio11(){
+        //
+        System.out.println("");
+    }
+    
+    private void ejercicioMedio12(){
+        //
+        System.out.println("");
+    }
+    
+    private void ejercicioMedio13(){
+        //
+        System.out.println("");
+    }
+    
+    private void ejercicioMedio14(){
+        //
+        System.out.println("");
+    }
+    
+    private void ejercicioMedio15(){
+        //
+        System.out.println("");
+    }
     
     
     
