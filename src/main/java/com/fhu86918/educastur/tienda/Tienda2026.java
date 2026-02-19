@@ -17,6 +17,7 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import jdk.management.jfr.FlightRecorderMXBean;
 //</editor-fold>
 
 
@@ -634,11 +635,10 @@ public class Tienda2026 {
     
     
     
+//</editor-fold>
     
-//</editor-fold>    
     
     
-            
     //<editor-fold defaultstate="collapsed" desc="SOLUCION EXAMEN 5/2/2026">
     
     /*private void uno(){
@@ -841,9 +841,107 @@ public class Tienda2026 {
 
 
 //</editor-fold>
-
+    
+    //<editor-fold defaultstate="collapsed" desc="Ejercicio extra">
+    
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
     public void setPedidos(ArrayList<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
+    
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//</editor-fold>
+    
+    
+    
+    //<editor-fold defaultstate="collapsed" desc="EJERCICIOS EN CONJUNTO DE METODOS Y API DE STREAMS">
+    
+    
+    private void Ejercicio1 (){
+        
+        // Mostrar por pantalla todos los artículos (uno por línea) usando articulos.values().stream().forEach(...)
+        System.out.println("");
+        articulos.values().stream().forEach(a -> System.out.println(a));
+        
+    }
+    
+    private void Ejercicio2 (){
+        
+        //Listar artículos con existencias 0 (o <=0 si lo prefieres) usando filter.
+        
+        articulos.values().stream()
+                .filter(a -> a.getExistencias() < 1)
+                .forEach(a -> System.out.println(a));
+    }
+    
+    private void Ejercicio3 () {
+        
+        //Listar artículos con PVP < 100 ordenados por PVP ascendente (sorted(Comparator.comparing(...))).
+        
+        articulos.values().stream()
+                .filter(a -> a.getPvp() < 100)
+                .sorted(Comparator.comparing(Articulo::getPvp))
+                .forEach(a -> System.out.println(a));
+    }
+    
+    private void Ejercicio4 (){
+        
+        //Listar artículos con PVP < 100 ordenados por PVP descendente (reversed).
+        articulos.values().stream()
+                .filter(a -> a.getPvp() < 100)
+                .sorted(Comparator.comparing(Articulo::getPvp).reversed())
+                .forEach(a -> System.out.println(a));
+    }
+    
+    
+    private void Ejercicio5 (){
+        //Pedir un número n y listar artículos con existencias > n (solo filter + forEach).
+        
+        int n = sc.nextInt();
+        
+        articulos.values().stream()
+                .filter(a -> a.getExistencias() > n)
+                .forEach(a -> System.out.println(a));
+    }
+    
+    
+    private void Ejercicio6 (){
+        //Pedir min y max y listar artículos cuyo PVP esté entre ambos (incluidos).
+
+        int max = sc.nextInt();
+        int min = sc.nextInt();
+        
+        articulos.values().stream()
+                .filter(a -> a.getExistencias() > min)
+                .filter(a -> a.getExistencias() < max)
+                .forEach(a -> System.out.println(a));
+    }
+        
+        
+    private void Ejercicio7 (){
+        
+    }
+            
+            
+    private void Ejercicio8 (){
+        
+    }
+    
+    
+    private void Ejercicio9 (){
+        
+    }
+    
+    
+    
+    
+    
+    
+//</editor-fold>
+    
     
 }
