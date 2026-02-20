@@ -56,13 +56,18 @@ public class Tienda2026 {
         articulos=new HashMap();
         clientes=new HashMap();
     }
+    
     //<editor-fold defaultstate="collapsed" desc="MAIN">
     
     public static void main(String[] args) {
 
         Tienda2026 t2026 = new Tienda2026();
         t2026.cargaDatos();
-        //t.menu;
+        //t2026.menu();
+        //t2026.uno();
+        //t2026.dos();
+        t2026.tres();
+        
         //t2026.ejercicio1(t2026.articulos);
         //t2026.ejercicio2(t2026.articulos);        
         //t2026.ejercicio3(t2026.articulos);        
@@ -70,20 +75,15 @@ public class Tienda2026 {
         //t2026.ejercicio5(t2026.articulos);     
         //t2026.ejercicio6(t2026.articulos);        
         //t2026.ejercicio7(t2026.articulos);        
-        t2026.ejercicio9(t2026.articulos);
-
-        /*uno();
-        dos();
-        tres();
-        cuatro();
-        cinco();*/
+        //t2026.ejercicio9(t2026.articulos);
+        
+        
         //System.out.println(t2026.unidadesVendidas1(t2026.articulos));     //falta completarlo
         //System.out.println(t2026.unidadesVendidas2(t2026.articulos));     //falta completarlo
         //System.out.println(t2026.unidadesVendidas3(t2026.articulos));     //falta completarlo
     }
     
 //</editor-fold>
-   
     
     //<editor-fold defaultstate="fold" desc="MENUS">
     public void menu() {
@@ -119,7 +119,7 @@ public class Tienda2026 {
             System.out.println("\t\t\t\t1 - ALTA");
             System.out.println("\t\t\t\t2 - BAJA");
             System.out.println("\t\t\t\t3 - REPOSICION");
-            System.out.println("\t\t\t\t3 - LISTADOS");
+            System.out.println("\t\t\t\t4 - LISTADOS");
             System.out.println("\t\t\t\t9 - MENU PRINCIPAL");
 
             Opcion = sc.nextInt();
@@ -148,7 +148,7 @@ public class Tienda2026 {
             System.out.println("\t\t\t\t1 - ALTA");
             System.out.println("\t\t\t\t2 - BAJA");
             System.out.println("\t\t\t\t3 - MODIFICACION");
-            System.out.println("\t\t\t\t3 - LISTADO");
+            System.out.println("\t\t\t\t4 - LISTADO");
             System.out.println("\t\t\t\t9 - MENU PRINCIPAL");
 
             Opcion = sc.nextInt();
@@ -190,7 +190,7 @@ public class Tienda2026 {
         System.out.println("Saliendo del programa...");
     }    
 //</editor-fold>
-        
+    
     // <editor-fold defaultstate="fold" desc="ARTICULOS"> 
     private void altaArticulos(){
         String idArticulo,descripcion,existencias,pvp; //Todas las
@@ -284,7 +284,7 @@ public class Tienda2026 {
     
     
     // </editor-fold>
-        
+    
     //<editor-fold defaultstate="fold" desc="CLIENTES">
     
     private void altaClientes(){
@@ -432,6 +432,8 @@ public class Tienda2026 {
             System.out.println(p + "- Total: " + totalPedido(p));
         }
         
+/*
+        
         System.out.println("\n");
         pedidos.stream().sorted(Comparator.comparing(p->totalPedido(p)))//El metodo sorted ordena por defecto://Letras: a - z;  Numeros: menor a mayor
                 .forEach(p->System.out.println(p + "- Total: " + totalPedido(p))); //el forEach sirve para que te dé el resultado del método que pides ()
@@ -444,7 +446,8 @@ public class Tienda2026 {
         pedidos.stream().filter(p-> totalPedido(p)>1000)                            //filtra los pedidos y te muestra los de más de 1000 euros
                 .sorted(Comparator.comparing(Pedido::getFechaPedido))      //ordena los pedidos de más de mil euros por fecha de pedido
                 .forEach(p->System.out.println(p + "- Total: " + totalPedido(p)));
-    }
+    */
+            }
     
     
 //libros.stream().sorted(Comparator.comparing(Libro::getTitulo)).forEach(l-> System.out.println(l));
@@ -598,7 +601,7 @@ public class Tienda2026 {
     */
     
     //VERSION CLASEICA
-    private int unidadesVendidas1 (Articulo a){
+    private int unidadesVendidas1Clasica (Articulo a){
         int c = 0;
         for (Pedido p : pedidos){
                 for (LineaPedido l:p.getCestaCompra()){
@@ -610,7 +613,7 @@ public class Tienda2026 {
     }
     
     //VERSION SEMI-CLASICA, UTILIZANDO STREAMS SOLO PARA LA cestaCompra de cada pedido de la tienda
-    private int unidadesVendidas2 (Articulo a){
+    private int unidadesVendidas2Clasica (Articulo a){
         int total = 0;
         for (Pedido p : pedidos){
             total += p.getCestaCompra().stream().filter(l -> l.getArticulo().equals(a))
@@ -622,7 +625,7 @@ public class Tienda2026 {
     
     //VERSION DE PROGRAMACION FUNCIONAL CON flatMap() para aplanar los streams
     //Importante el flatMap ----- Nos "aplana" la cesta de la compra para poder convertirla en stream
-    private int unidadesVendidas3 (Articulo a){
+    private int unidadesVendidas3Clasica (Articulo a){
         return pedidos.stream().flatMap(p -> p.getCestaCompra().stream())//Muy importante esta primera línea. Le pedimos que nos procese todas las lineasPedido de la cestaCompra de cada Pedido de la tienda. Saltamos de cestaCompra a Pedidos. Tenemos cada pedido de las lineas de pedido de la tienda
                 .filter(l -> l.getArticulo().equals(a))
                 .mapToInt(LineaPedido::getUnidades).sum();
@@ -754,7 +757,7 @@ public class Tienda2026 {
     */
     //</editor-fold>
        
-    //<editor-fold defaultstate="collapsed" desc="EXAMEN 3/2/2026">
+    //<editor-fold defaultstate="collapsed" desc="EXAMEN /2/2026">
     
 /*    ArrayList<Articulo> articulosAux = new ArrayList(articulos.values());
     
@@ -983,7 +986,7 @@ public class Tienda2026 {
 
 */
 //</editor-fold>
-  
+    
     //<editor-fold defaultstate="collapsed" desc="EJERCICIOS EN CONJUNTO DE METODOS Y API DE STREAMS MEDIO">
     
     
@@ -1022,73 +1025,6 @@ public class Tienda2026 {
         
         
     }
-    
-    private void ejercicioMedio3(){
-        //
-        System.out.println("");
-    }
-    
-    private void ejercicioMedio4(){
-        //
-        System.out.println("");
-    }
-    
-    private void ejercicioMedio5(){
-        //
-        System.out.println("");
-    }
-    
-    private void ejercicioMedio6(){
-        //
-        System.out.println("");
-    }
-    
-    private void ejercicioMedio7(){
-        //
-        System.out.println("");
-    }
-    
-    private void ejercicioMedio8(){
-        //
-        System.out.println("");
-    }
-    
-    private void ejercicioMedio9(){
-        //
-        System.out.println("");
-    }
-    
-    private void ejercicioMedio10(){    
-        //
-        System.out.println("");
-    }
-    
-    private void ejercicioMedio11(){
-        //
-        System.out.println("");
-    }
-    
-    private void ejercicioMedio12(){
-        //
-        System.out.println("");
-    }
-    
-    private void ejercicioMedio13(){
-        //
-        System.out.println("");
-    }
-    
-    private void ejercicioMedio14(){
-        //
-        System.out.println("");
-    }
-    
-    private void ejercicioMedio15(){
-        //
-        System.out.println("");
-    }
-    
-    
     
     
     
@@ -1259,42 +1195,89 @@ public class Tienda2026 {
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     private void uno(){
+//        ArrayList<Pedido> pedidosAux = new ArrayList(pedidos);
         
-        
-        
+        System.out.println("\n");
+
+        pedidos.stream().filter(p-> totalPedido(p)>1000)
+                .sorted(Comparator.comparing(Pedido::getFechaPedido))
+                .forEach(p->System.out.println(p + "- Total: " + totalPedido(p)));
     }
-    
     
     private void dos(){
+
+        System.out.println("\n");
         
+        String[] secciones={"","PERIFERICOS","ALMACENAMIENTO","IMPRESORAS","MONITORES"};
+        System.out.println("SECCION A LISTAR:");
+        String sec=sc.next();
+        System.out.println("ARTICULOS DE LA SECCION " + secciones[Integer.parseInt(sec)] +":");
+            
+            
+            articulos.values().stream()
+                    .filter(a -> a.getIdArticulo().startsWith(sec) && a.getExistencias() > 0)
+                    .sorted(Comparator.comparing(Articulo::getPvp))
+                    .forEach(a -> System.out.println(a));        
         
-        
-    }
+        }
     
     
-    private void tres(){
+    private void tres() {
+        ArrayList<Articulo> articulosSIN = new ArrayList();
+       
+        System.out.println("\n");        
+        for (Articulo a:articulos.values()){
+            int cont=0;
+            for (Pedido p:pedidos){
+                if (p.getClientePedido().equals(a)){
+                    cont++;
+                    break;
+                }
+            }
+            if (cont==0){
+                articulosSIN.add(a);
+            }
+        }
         
-        
-        
+        for (Articulo a : articulosSIN){
+            System.out.println(a);
+        }
     }
     
     
     private void cuatro(){
         
+        System.out.println("\n");
+        LocalDate hoy = LocalDate.now();
+        LocalDate fechaLimite = LocalDate.now().minusDays(5);
+        double total = pedidos.stream()
+                .filter(p -> p.getFechaPedido().isAfter(fechaLimite) || p.getFechaPedido().equals(fechaLimite))
+                .mapToDouble(p -> totalPedido(p))
+                .sum();
         
+        System.out.println("Total facturado entre " + fechaLimite + " y " + hoy + " : " + total + "€");
         
     }
     
     
     private void cinco(){
-        
-        
-        
+                
     }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //</editor-fold>
     
     
+        //<editor-fold defaultstate="collapsed" desc="EXAMEN 20/02/2026 RESUELTO">
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
+    
+    
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------    
+//</editor-fold>
+
 }
+
