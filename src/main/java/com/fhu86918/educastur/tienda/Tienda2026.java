@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 import jdk.management.jfr.FlightRecorderMXBean;
 //</editor-fold>
@@ -358,6 +359,13 @@ public class Tienda2026 {
         return totalPedido;
     }
     
+    
+    public double totalCliente (Cliente c) {
+        
+        return pedidos.stream().filter(p -> p.getClientePedido().equals(c)).mapToDouble(p -> totalPedido(p)).sum();
+    }
+    
+
     private void nuevoPedido() {
         sc.nextLine();
         String idCliente;
@@ -1332,5 +1340,136 @@ public class Tienda2026 {
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------    
 //</editor-fold>
 
+    
+    
+    
+    //<editor-fold defaultstate="collapsed" desc="ARCHIVOS Y DEMÁS (COMIENZO)">
+    
+
+    private void pedidosOrdenadosPorFecha (){
+//Dame los pedidos ordenados por fecha y envíalos a una nueva collección        
+        List <Pedido> pedidosOrdenadosPorFecha = 
+                pedidos.stream()
+                        .sorted(Comparator.comparing(Pedido::getFechaPedido).reversed())
+                        .collect(Collectors.toList());
+        
+        pedidos.stream().forEach(p -> System.out.println(p.getIdPedido() + " - " + p.getFechaPedido()));
+        System.out.println("\n");
+        pedidosOrdenadosPorFecha.stream().forEach(p -> System.out.println(p.getIdPedido() + " - " + p.getFechaPedido()));
+
+
+        System.out.println("\n");
+        //Calcula el total de cada pedido, con eso voy a un mapa con el valor del total como key, y con el pedido en sí como value
+        
+/*        List <Pedido> pedidosOrdenadosPorFecha = 
+        pedidos.stream()
+                .sorted(Comparator.comparing(Pedido::getFechaPedido).reversed())
+                .collect(Collectors.toMap(totalPedido(p), Pedido));
+*/
+
+/*
+        HashMap <Double, Pedido> pedidosConTotales = new HashMap();
+        for (Pedido p : pedidos) {
+            pedidosConTotales.put(totalPedido(p), p);
+        }
+        
+        for (Double total : pedidosConTotales.keySet()) {
+            System.out.println(pedidosConTotales.get(total) + " - " + total);
+        }
+*/
+        TreeMap <Double, Pedido> pedidosConTotales = new TreeMap(); //Los TreeMaps te ordenan por sí solos por las claves que tu le indiques, en este caso por el Double 
+        for (Pedido p : pedidos) {
+            pedidosConTotales.put(totalPedido(p), p);
+        }
+        
+        for (Double total : pedidosConTotales.descendingKeySet()) {                 //El "descendingKeySet" te ordena tal y como explico arriba, pero a la inversa
+            System.out.println(pedidosConTotales.get(total).getIdPedido() + " - " + total);
+        }
+        
+        TreeMap <Double, Cliente> ventasPorCliente = new TreeMap(); 
+        for (Cliente c : clientes.values()) {
+            ventasPorCliente.put(totalCliente(c), c);
+        }
+        
+        for (Double totCli : ventasPorCliente.keySet()) {                 
+            System.out.println(ventasPorCliente.get(totCli).getNombre() + " - " + totCli);
+        }
+        
+        
+        //Crear 4 listas de cada seccion (Monitores, almacenamiento, etc), en la que cada una incluya solamente sus respectivos productos; en versión clásica deben utilizarse ArrayList
+        ArrayList <Articulo> perifericos1 = new ArrayList();
+        ArrayList <Articulo> almacenamiento1 = new ArrayList();
+        ArrayList <Articulo> impresoras1 = new ArrayList();
+        ArrayList <Articulo> monitores1 = new ArrayList();
+        
+        for (Articulo a : articulos.values()){
+            switch  (a.getIdArticulo().charAt(0)){
+                case '1' :
+                    perifericos1.add(a);
+                    break;
+                
+                case '2' :
+                    almacenamiento1.add(a);
+                    break;
+                
+                case '3' :
+                    impresoras1.add(a);
+                    break;
+                
+                case '4' :
+                    monitores1.add(a);
+                    break;
+                
+                   
+            }
+        }
+        
+
+        //Crear 4 listas de cada seccion (Monitores, almacenamiento, etc), en la que cada una incluya solamente sus respectivos productos; en versión moderna deben utilizarse List
+                List <Articulo> perifericos2, almacenamiento2, impresoras2, monitores2;
+
+        
+                perifericos2 = articulos.values().stream().filter(p -> p.getIdArticulo().startsWith("1"))
+                        .collect(Collectors.toList());
+                
+
+                almacenamiento2 = articulos.values().stream().filter(p -> p.getIdArticulo().startsWith("2"))
+                        .collect(Collectors.toList());
+                
+                impresoras2 = articulos.values().stream().filter(p -> p.getIdArticulo().startsWith("3"))
+                        .collect(Collectors.toList());
+                
+                monitores2 = articulos.values().stream().filter(p -> p.getIdArticulo().startsWith("4"))
+                        .collect(Collectors.toList());                
+
+        
+        
+        
+        
+        
+        //BORRA ARTICULOS DE LA SECCION IMPRESORA
+        articulos.values().removeIf(a -> a.getIdArticulo().startsWith("3"));
+        System.out.println("\n");
+        articulos.values().forEach(a -> System.out.println(a));
+        
+        
+        //LAS COLECCIONES DE TIPO LIST NO ADMITEN removeIf
+        //BORRA LOS PEDIDOS DE MAS DE 3 DÍAS DE ANTIGÜEDAD
+        List <Pedido> pedidosAntiguos = pedidos.stream()
+                .filter(p -> p.getFechaPedido().isBefore(LocalDate.now().minusDays(3)))
+                .collect(Collectors.toList());
+        pedidos.removeAll(pedidosAntiguos);
+        System.out.println(pedidos);
+    }
+    
+    
+//</editor-fold>
+    
+    
+    
+    
+    
+    
+    
 }
 
