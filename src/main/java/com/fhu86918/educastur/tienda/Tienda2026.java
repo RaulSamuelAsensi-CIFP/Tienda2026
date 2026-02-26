@@ -756,7 +756,7 @@ public class Tienda2026 {
     }
     */
     //</editor-fold>
-       
+    
     //<editor-fold defaultstate="collapsed" desc="EXAMEN /2/2026">
     
 /*    ArrayList<Articulo> articulosAux = new ArrayList(articulos.values());
@@ -1266,13 +1266,66 @@ public class Tienda2026 {
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //</editor-fold>
-        
+    
     //<editor-fold defaultstate="collapsed" desc="EXAMEN 20/02/2026 RESUELTO">
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 /*    
+     //1. LISTADO DE LOS CLIENTES ORDENADOS DE Mayor a Menor por su GASTO
+    private void uno(){
+        clientes.values().stream()
+                .sorted(Comparator.comparing(c-> totalCliente((Cliente) c)).reversed())
+                .forEach(c-> System.out.println(c + "\t\t Total GASTADO: " +  totalCliente(c))); 
+    }
     
+    //2. LISTADO DE LOS ARTICULOS DE UNA SECCIÓN CON existencias >0 y ordenados por Pvp
+    private void dos() {
+        System.out.println("SECCION A LISTAR:");
+        String sec=sc.next();
+       
+        articulos.values().stream()
+                .filter(a->a.getIdArticulo().startsWith(sec)&&a.getExistencias()>0)
+                .sorted(Comparator.comparing(Articulo::getPvp).reversed())
+                .forEach(a->System.out.println(a));
+    }
+    
+    //3. CREAR Y LISTAR NUEVA COLECCION articulosNoVendidos
+    private void tres(){
+        Set<Articulo> vendidos
+                = pedidos.stream()
+                        .flatMap(p -> p.getCestaCompra().stream())
+                        .map(LineaPedido::getArticulo)
+                        .collect(Collectors.toSet());
+
+        List<Articulo> noVendidos
+                = articulos.values().stream()
+                        .filter(a -> !vendidos.contains(a))
+                        .toList();
+        System.out.println("\n");
+        noVendidos.stream().forEach(a -> System.out.println(a));
+    }
+    
+   
+    //4. TOTAL FACTURADO EN LA TIENDA EN LOS ÚLTIMOS 5 DÍAS
+    private void cuatro() {
+    
+        LocalDate fecha1 = LocalDate.now().minusDays(5);
+        double total5dias = pedidos.stream()
+            .filter(p -> p.getFechaPedido().isAfter(fecha1))
+               .flatMap(p -> p.getCestaCompra().stream())
+                .mapToDouble(lp -> lp.getArticulo().getPvp() * lp.getUnidades()).sum();
+        System.out.println("\nTotal facturado los ultimos 5 dias: " + total5dias);
+    }   
+   
+    //5. IMPORTE MEDIO POR PEDIDO EN NUESTRA TIENDA
+    private void cinco() {
+        double importePedidos = pedidos.stream()
+            .flatMap(p -> p.getCestaCompra().stream())
+              .mapToDouble(lp -> lp.getArticulo().getPvp() * lp.getUnidades()).sum();
+        
+        System.out.println("\nImporte Medio Pedidos TIENDA: " + importePedidos/pedidos.size());  
+    }
 */    
     
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
