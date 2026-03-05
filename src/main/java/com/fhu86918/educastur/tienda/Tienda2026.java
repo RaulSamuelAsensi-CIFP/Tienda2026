@@ -4,8 +4,11 @@
 package com.fhu86918.educastur.tienda;
 
 //<editor-fold defaultstate="fold" desc="IMPORTS">
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.ContentHandlerFactory;
@@ -67,7 +70,8 @@ public class Tienda2026 {
         Tienda2026 t2026 = new Tienda2026();
         //t2026.cargaDatos();
         //t2026.guardaClientes();
-        t2026.guardaArticulosPorSeccion();        
+        //t2026.guardaArticulosPorSeccion();      
+        t2026.leeArticulosPorSeccion();
         //t2026.menu();
 
     }
@@ -271,6 +275,7 @@ public class Tienda2026 {
     }
 
     // </editor-fold>
+    
     //<editor-fold defaultstate="fold" desc="CLIENTES">
     private void altaClientes() {
 
@@ -290,8 +295,8 @@ public class Tienda2026 {
             System.out.println(dni);
         }
     }
-//</editor-fold>   
-
+//</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="PEDIDOS">
     private String generaIdPedido(String idCliente) {
         String nuevoId;//variable String para ir construyendo un nuevo idPedido
@@ -427,7 +432,8 @@ public class Tienda2026 {
 
 //libros.stream().sorted(Comparator.comparing(Libro::getTitulo)).forEach(l-> System.out.println(l));
 //Ejemplo de ordenación en biblioteca, si tenemos definida e inicializada la variable. En el caso de la tienda: "p"; en el metodo al que se llama para la ordenacion (totalPedido)
-//</editor-fold>    
+//</editor-fold>
+    
     // <editor-fold defaultstate="fold" desc="CARGA DATOS"> 
     public void cargaDatos() {
         clientes.put("80580845T", new Cliente("80580845T", "ANA ", "658111111", "ana@gmail.com"));
@@ -585,6 +591,7 @@ public class Tienda2026 {
     }
 
 //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="SOLUCION EXAMEN 5/2/2026">
     /*private void uno(){
         String[] secciones={"","PERIFERICOS","ALMACENAMIENTO","IMPRESORAS","MONITORES"};
@@ -703,6 +710,7 @@ public class Tienda2026 {
     }
      */
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="EXAMEN /2/2026">
     /*    ArrayList<Articulo> articulosAux = new ArrayList(articulos.values());
     
@@ -779,6 +787,7 @@ public class Tienda2026 {
         }
     }*/
 //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Ejercicio extra">
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -789,6 +798,7 @@ public class Tienda2026 {
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="EJERCICIOS EN CONJUNTO DE METODOS Y API DE STREAMS BASICOS">
     private void ejercicio1(HashMap<String, Articulo> articulos1) {
 
@@ -931,6 +941,7 @@ public class Tienda2026 {
 
      */
 //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="EJERCICIOS EN CONJUNTO DE METODOS Y API DE STREAMS MEDIO">
     private void ejercicioMedio0() {
         //Contar cuántos pedidos ha hecho un cliente concreto (filtra por p.getClientePedido().getIdCliente() y count)
@@ -967,6 +978,7 @@ public class Tienda2026 {
     }
 
 //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="AlGUNOS MÉTODOS VISTOS YA PERO REALIZADOS AHORA CON STREAMS">
     //Total gastado por un Cliente
     public double totalCliente2(Cliente c) {
@@ -1027,6 +1039,7 @@ public class Tienda2026 {
     }
 
 //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="EJERCICIOS CON STREAMS">
     private void listadosStreams() {
 
@@ -1149,6 +1162,7 @@ public class Tienda2026 {
     }
 
 //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="EXAMEN 20/02/2026">
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1284,6 +1298,7 @@ public class Tienda2026 {
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------    
 //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="ARCHIVOS Y DEMÁS (COMIENZO)">
     private void pedidosOrdenadosPorFecha() {
 //Dame los pedidos ordenados por fecha y envíalos a una nueva collección        
@@ -1446,9 +1461,14 @@ public class Tienda2026 {
             System.out.println("No se ha podido escribir en el fichero");
         }
     }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     private void guardaArticulosPorSeccion() {
         try (BufferedWriter bwPerifericos = new BufferedWriter(new FileWriter("E:/1dawd/Curso/Programacion/NetBeansProjects/Tienda/Perifericos.csv"));
-            BufferedWriter bwAlmacenamiento = new BufferedWriter(new FileWriter("E:/1dawd/Curso/Programacion/NetBeansProjects/Tienda/Almancenamiento.csv"));
+            BufferedWriter bwAlmacenamiento = new BufferedWriter(new FileWriter("E:/1dawd/Curso/Programacion/NetBeansProjects/Tienda/Almacenamiento.csv"));
             BufferedWriter bwImpresoras = new BufferedWriter(new FileWriter("E:/1dawd/Curso/Programacion/NetBeansProjects/Tienda/Impresoras.csv"));
             BufferedWriter bwMonitores = new BufferedWriter(new FileWriter("E:/1dawd/Curso/Programacion/NetBeansProjects/Tienda/Monitores.csv"))) {
             
@@ -1498,7 +1518,11 @@ public class Tienda2026 {
             System.out.println("No se ha podido escribir en el fichero");
         }
     }
-/*    
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
     private void guardaArticulo() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("E:/1dawd/Curso/PROGRAMACIÓN/NetBeansProjects/Tienda1/articulo.txt"))) {
             for (Cliente c : clientes.values()) {
@@ -1518,6 +1542,11 @@ public class Tienda2026 {
             System.out.println("No se ha podido escribir en el fichero");
         }
     }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     private void guardaPedido() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("E:/1dawd/Curso/PROGRAMACIÓN/NetBeansProjects/Tienda1/pedidos.txt"))) {
             for (Cliente c : clientes.values()) {
@@ -1537,7 +1566,10 @@ public class Tienda2026 {
             System.out.println("No se ha podido escribir en el fichero");
         }
     }    
-*/    
+  
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
 /*   
     private void leeClientes() {
@@ -1557,9 +1589,77 @@ public class Tienda2026 {
         }    
     }
 */
+    
+    
+/*
+    //          COMO SE LEEN ESOS ARCHIVOS? ------> 
+    private void leeArticulosPorSeccion (){
+        
+        try (BufferedReader brPerifericos = new BufferedReader(new FileReader("E:/1dawd/Curso/Programacion/NetBeansProjects/Tienda/Perifericos.csv")); 
+            BufferedReader brAlmacenamiento = new BufferedReader(new FileReader("E:/1dawd/Curso/Programacion/NetBeansProjects/Tienda/Almacenamiento.csv")) ;
+            BufferedReader brImpresoras = new BufferedReader(new FileReader("E:/1dawd/Curso/Programacion/NetBeansProjects/Tienda/Impresoras.csv")) ;
+            BufferedReader brMonitores = new BufferedReader(new FileReader("E:/1dawd/Curso/Programacion/NetBeansProjects/Tienda/Monitores.csv"))) {
+            String cadenaPerifericos = brPerifericos.readLine();
+            while (cadenaPerifericos != null) {
+                System.out.println(cadenaPerifericos);
+                cadenaPerifericos = brPerifericos.readLine();
+            }
+            System.out.println("\n\n");
+            String cadenaAlmacenamiento = brAlmacenamiento.readLine();
+            while (cadenaAlmacenamiento != null) {
+                System.out.println(cadenaAlmacenamiento);
+                cadenaAlmacenamiento = brAlmacenamiento.readLine();
+            }
+            System.out.println("\n\n");
+            String cadenaImpresoras = brImpresoras.readLine();
+            while (cadenaImpresoras != null) {
+                System.out.println(cadenaImpresoras);
+                cadenaImpresoras = brImpresoras.readLine();
+            }
+            System.out.println("\n\n");
+            String cadenaMonitores = brMonitores.readLine();
+            while (cadenaMonitores != null) {
+                System.out.println(cadenaMonitores);
+                cadenaMonitores = brMonitores.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
 
-            
-            
+    }
+*/            
+    private void leeArticulosPorSeccion() {
+
+        //SIMPLEMENTE LEER LAS LÍNEAS DEL ARCHIVO clientes.txt Y MOSTRARLAS POR PANTALLA
+        System.out.println("\nListado de Clientes directamente desde los articulos por secciones\n");
+        try (Scanner scPerifericos = new Scanner(new File("E:/1dawd/Curso/Programacion/NetBeansProjects/Tienda/Perifericos.csv"));
+        Scanner scAlmacenamiento = new Scanner(new File("E:/1dawd/Curso/Programacion/NetBeansProjects/Tienda/Almacenamiento.csv"));
+        Scanner scImpresoras = new Scanner(new File("E:/1dawd/Curso/Programacion/NetBeansProjects/Tienda/Impresoras.csv"));
+        Scanner scMonitores = new Scanner(new File("E:/1dawd/Curso/Programacion/NetBeansProjects/Tienda/Monitores.csv"))) {
+            while (scPerifericos.hasNextLine()) {
+                System.out.println(scPerifericos.nextLine());
+            }
+            System.out.println("\n\n");
+            while (scAlmacenamiento.hasNextLine()) {
+                System.out.println(scAlmacenamiento.nextLine());
+            }
+            System.out.println("\n\n");
+            while (scImpresoras.hasNextLine()) {
+                System.out.println(scImpresoras.nextLine());
+            }
+            System.out.println("\n\n");
+            while (scMonitores.hasNextLine()) {
+                System.out.println(scMonitores.nextLine());
+            }
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+    }
+    
+    
+
             
 //</editor-fold>
 
