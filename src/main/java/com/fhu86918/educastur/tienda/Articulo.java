@@ -4,11 +4,13 @@
  */
 package com.fhu86918.educastur.tienda;
 
+import java.io.Serializable;
+
 /**
  *
  * @author 1dawd
  */
-public class Articulo {
+public class Articulo implements Serializable{
     private String idArticulo;
     private String descripcion;
     private int existencias;

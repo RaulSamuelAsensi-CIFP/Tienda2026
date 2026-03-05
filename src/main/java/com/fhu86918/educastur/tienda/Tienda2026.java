@@ -27,6 +27,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import jdk.management.jfr.FlightRecorderMXBean;
+import java.io.Serializable;
 //</editor-fold>
 
 /**
@@ -34,7 +35,7 @@ import jdk.management.jfr.FlightRecorderMXBean;
  * @author 1dawd
  */
 // <editor-fold defaultstate="collapsed" desc="CLASE TIENDA 2026">
-public class Tienda2026 {
+public class Tienda2026 implements Serializable {
 
     private static Scanner sc = new Scanner(System.in);
     private ArrayList<Pedido> pedidos;
@@ -65,8 +66,10 @@ public class Tienda2026 {
     }
 
     //<editor-fold defaultstate="collapsed" desc="MAIN">
-    public static void main(String[] args) {
+    public static void main(String[] args) {    
 
+        //La primera vez que ejecute esto con el Backup de Tienda Completa, utilizar el carga datos, llamar al cargadatos, luego al menú, y luego al backup.
+        //La segunda vez, no ejecutaremos el cargadatos, sino el metodo importar tienda, luego el menú, y luego el backup.
         Tienda2026 t2026 = new Tienda2026();
         //t2026.cargaDatos();
         t2026.leeClientes();
@@ -1439,10 +1442,8 @@ public class Tienda2026 {
     }
 
 //</editor-fold>
-
-
     
-//<editor-fold defaultstate="collapsed" desc="LECTURA DE ARCHIVOS">
+    //<editor-fold defaultstate="collapsed" desc="LECTURA DE ARCHIVOS">
     
     
     
@@ -1541,7 +1542,7 @@ public class Tienda2026 {
     }
 //</editor-fold>
 
-//<editor-fold defaultstate="collapsed" desc="ESCRITURA DE ARCHIVOS">
+    //<editor-fold defaultstate="collapsed" desc="ESCRITURA DE ARCHIVOS">
     
     
     private void guardaClientes() {
@@ -1722,7 +1723,9 @@ public class Tienda2026 {
 
 //</editor-fold>
 
-
+//<editor-fold defaultstate="collapsed" desc="COMIENZO DE ARCHIVOS BINARIOS (.dat)">
+    
+//</editor-fold>
 
 
 }

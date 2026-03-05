@@ -6,12 +6,13 @@ package com.fhu86918.educastur.tienda;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.io.Serializable;
 
 /**
  *
  * @author 1dawd
  */
-public class Pedido {
+public class Pedido implements Serializable {
     private String idPedido;
     private Cliente clientePedido;
     private LocalDate fechaPedido;

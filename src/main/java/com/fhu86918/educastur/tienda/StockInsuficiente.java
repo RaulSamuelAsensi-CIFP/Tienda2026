@@ -4,11 +4,13 @@
  */
 package com.fhu86918.educastur.tienda;
 
+import java.io.Serializable;
+
 /**
  *
  * @author 1dawd
  */
-public class StockInsuficiente extends Exception {
+public class StockInsuficiente extends Exception implements Serializable {
     public  StockInsuficiente(String mensaje){
         super(mensaje);
     }

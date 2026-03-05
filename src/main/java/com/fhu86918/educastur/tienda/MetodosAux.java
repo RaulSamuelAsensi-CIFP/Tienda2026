@@ -4,11 +4,13 @@
  */
 package com.fhu86918.educastur.tienda;
 
+import java.io.Serializable;
+
 /**
  *
  * @author 1dawd
  */
-public class MetodosAux {
+public class MetodosAux implements Serializable {
             
    public static boolean esInt(String s) {
         int n;
