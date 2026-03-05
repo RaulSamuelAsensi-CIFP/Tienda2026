@@ -36,8 +36,10 @@ import java.io.Serializable;
  */
 // <editor-fold defaultstate="collapsed" desc="CLASE TIENDA 2026">
 public class Tienda2026 implements Serializable {
+    //Para poder serializar la tienda hay que borrar la declaración de Scanner de debajo, y ponerla en cada metodo y menu que necesite de uno
+    //porque si no la tienda no se podrá serializar correctamente.
 
-    private static Scanner sc = new Scanner(System.in);
+    private static transient Scanner sc = new Scanner(System.in);
     private ArrayList<Pedido> pedidos;
     private HashMap<String, Articulo> articulos;
     private HashMap<String, Cliente> clientes;
