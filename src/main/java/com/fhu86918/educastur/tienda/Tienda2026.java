@@ -1755,7 +1755,7 @@ public class Tienda2026 implements Serializable {
 
     //<editor-fold defaultstate="collapsed" desc="BACKUPS DE LA TIENDA">
     
-    public void backupColecciones () {
+    public void exportarColecciones () {
         try (ObjectOutputStream oosArticulos = new ObjectOutputStream (new FileOutputStream ("E:Articulos.dat"));
             ObjectOutputStream oosClientes = new ObjectOutputStream (new FileOutputStream ("E:Clientes.dat"));
             ObjectOutputStream oosPedidos = new ObjectOutputStream (new FileOutputStream ("E:Pedidos.dat"))){
